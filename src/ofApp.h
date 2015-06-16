@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 
+#include "Boid.h"
+
 class ofApp : public ofBaseApp {
 public:
     void setup();
@@ -11,4 +13,6 @@ public:
 
     void keyPressed(int key);
     void mousePressed(int x, int y, int button);
+
+    std::vector<Boid> flock;
 };
