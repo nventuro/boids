@@ -70,6 +70,10 @@ void Boid::update(std::vector<Boid> &flock) {
     }
 
     speed += accel;
+    if (speed.length() > 8) {
+        speed = speed.getNormalized() * 8;
+    }
+
     pos += speed;
 
     if (pos.x > maxX) {
