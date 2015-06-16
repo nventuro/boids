@@ -34,3 +34,6 @@ obj/
 !/bin
 /bin/*
 !/bin/data
+
+# CodeBlocks layout files
+*.layout
