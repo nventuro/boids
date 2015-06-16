@@ -18,6 +18,9 @@ void Boid::setup(int w, int h, float maxDist, int behaviourPeriod) {
     speed.x = ofRandom(1);
     speed.y = ofRandom(1);
     speed = speed.getNormalized();
+
+    accel.x = 0;
+    accel.y = 0;
 }
 
 void Boid::update(std::vector<Boid> &flock) {
@@ -33,18 +36,18 @@ void Boid::update(std::vector<Boid> &flock) {
             }
         }
 
-        std::vector<ofVec2f> desiredSpeeds;
+        std::vector<ofVec2f> desiredAccels;
         for (std::vector<Behaviour*>::iterator beh_it = behaviours.begin(); beh_it != behaviours.end(); ++beh_it) {
-            desiredSpeeds.push_back((*beh_it)->apply(this, nearbyBoids));
+            desiredAccels.push_back((*beh_it)->apply(this, nearbyBoids));
         }
 
-        for (std::vector<ofVec2f>::iterator dspeed_it = desiredSpeeds.begin(); dspeed_it != desiredSpeeds.end(); ++dspeed_it) {
-            speed += *dspeed_it;
+        for (std::vector<ofVec2f>::iterator daccel_it = desiredAccels.begin(); daccel_it != desiredAccels.end(); ++daccel_it) {
+            accel += *daccel_it;
         }
-
-        speed /= desiredSpeeds.size() + 1;
+        accel /= desiredAccels.size() + 1;
     }
 
+    speed += accel;
     pos += speed;
 
     if (pos.x > maxX) {

@@ -27,6 +27,7 @@ private:
 
     ofVec2f pos;
     ofVec2f speed;
+    ofVec2f accel;
 
     std::vector<Behaviour*> behaviours;
 
