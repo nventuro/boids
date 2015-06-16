@@ -1,8 +1,11 @@
 #ifndef _BOID_H
 #define _BOID_H
 
-#include "ofVec2f.h"
+#include "Boid.fwd.h"
+#include "Behaviour.fwd.h"
+
 #include <vector>
+#include "ofVec2f.h"
 
 class Boid {
 public:
@@ -10,15 +13,22 @@ public:
     void update(std::vector<Boid> &flock);
     void draw(void);
 
+    ofVec2f getPos(void);
+    ofVec2f getSpeed(void);
+
 private:
     int maxX;
     int maxY;
 
     float maxDist;
+
     int behaviourPeriod;
+    int noBehaviourUpdates;
 
     ofVec2f pos;
     ofVec2f speed;
+
+    std::vector<Behaviour*> behaviours;
 
     int id;
 
