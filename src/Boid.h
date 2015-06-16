@@ -9,6 +9,8 @@
 
 class Boid {
 public:
+    Boid(void);
+
     void setup(int w, int h, float maxDist = 60, int behaviourPeriod = 5);
     void update(std::vector<Boid> &flock);
     void draw(void);
@@ -17,6 +19,8 @@ public:
     ofVec2f getPos(void);
     ofVec2f getSpeed(void);
     ofVec2f getAccel(void);
+
+    int getId(void);
 
 private:
     int maxX;

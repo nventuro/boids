@@ -5,6 +5,10 @@
 #include "ofMath.h"
 #include "ofGraphics.h"
 
+Boid::Boid(void) {
+    id = getNextID();
+}
+
 void Boid::setup(int w, int h, float maxDist, int behaviourPeriod) {
     maxX = w;
     maxY = h;
@@ -44,7 +48,7 @@ void Boid::update(std::vector<Boid> &flock) {
 
         std::vector<Boid*> nearbyBoids;
         for (std::vector<Boid>::iterator boid_it = flock.begin(); boid_it != flock.end(); ++boid_it) {
-            if (pos.squareDistance(boid_it->getPos()) < sqMaxDist) {
+            if ((id != boid_it->getId()) && (pos.squareDistance(boid_it->getPos()) < sqMaxDist)) {
                 nearbyBoids.push_back(&(*boid_it));
             }
         }
@@ -99,6 +103,10 @@ ofVec2f Boid::getSpeed(void) {
 
 ofVec2f Boid::getAccel(void) {
     return accel;
+}
+
+int Boid::getId(void) {
+    return id;
 }
 
 int Boid::getNextID(void) {
