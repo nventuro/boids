@@ -15,8 +15,8 @@ void Boid::setup(int w, int h, float maxDist, int behaviourPeriod) {
     pos.x = ofRandom(maxX);
     pos.y = ofRandom(maxY);
 
-    speed.x = ofRandom(1);
-    speed.y = ofRandom(1);
+    speed.x = ofRandom(-1, 1);
+    speed.y = ofRandom(-1, 1);
     speed = speed.getNormalized();
 
     accel.x = 0;
@@ -51,27 +51,23 @@ void Boid::update(std::vector<Boid> &flock) {
     pos += speed;
 
     if (pos.x > maxX) {
-        pos.x = maxX;
-        speed.x *= -1;
+        pos.x -= maxX;
     }
     else if (pos.x < 0) {
-        pos.x = 0;
-        speed.x *= -1;
+        pos.x += maxX;
     }
 
     if (pos.y > maxY) {
-        pos.y = maxY;
-        speed.y *= -1;
+        pos.y -= maxY;
     }
     else if (pos.y < 0) {
-        pos.y = 0;
-        speed.y *= -1;
+        pos.y += maxY;
     }
 }
 
 void Boid::draw(void) {
     ofSetColor(ofColor::white);
-    ofCircle(pos, 3);
+    ofCircle(pos, 2);
 }
 
 ofVec2f Boid::getPos(void) {

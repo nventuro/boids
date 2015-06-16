@@ -1,9 +1,11 @@
 #include "ofApp.h"
 
 void ofApp::setup() {
-    for (int i = 0; i < 30; ++i) {
+    ofSeedRandom();
+
+    for (int i = 0; i < 300; ++i) {
         flock.push_back(Boid());
-        flock.back().setup(640, 480);
+        flock.back().setup(1280, 720);
     }
 }
 
