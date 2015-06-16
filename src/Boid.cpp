@@ -37,7 +37,7 @@ void Boid::setup(int w, int h, float maxDist, int behaviourPeriod) {
 }
 
 void Boid::update(std::vector<Boid> &flock) {
-    if ((++noBehaviourUpdates) > behaviourPeriod) {
+    if ((++noBehaviourUpdates) >= behaviourPeriod) {
         noBehaviourUpdates = 0;
 
         float sqMaxDist = maxDist * maxDist;
