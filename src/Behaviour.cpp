@@ -75,3 +75,47 @@ ofVec2f Cohesion::applyBehaviour(Boid *influencee, std::vector<Boid*> &influence
 
     return flockCenter - influencee->getPos();
 }
+
+// Cage
+
+Cage::Cage() {
+    threshold = 50;
+}
+
+void Cage::setThreshold(int threshold) {
+    this->threshold = threshold;
+}
+
+ofVec2f Cage::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers) {
+    // Cage limits (along with the lines correspoding to x = 0 and y = 0)
+    int maxX = influencee->getMaxX();
+    int maxY = influencee->getMaxY();
+
+    // Threshold is assumed to be smaller than both maxX / 2 and maxY / 2
+
+    float xDesire;
+
+    if (influencee->getPos().x < threshold) {
+        xDesire = 1 / influencee->getPos().x;
+    }
+    else if ((maxX - influencee->getPos().x) < threshold) {
+        xDesire = 1 / (maxX - influencee->getPos().x);
+    }
+    else {
+        xDesire = influencee->getAccel().x;
+    }
+
+    float yDesire;
+
+    if (influencee->getPos().y < threshold) {
+        yDesire = 1 / influencee->getPos().y;
+    }
+    else if ((maxY - influencee->getPos().y) < threshold) {
+        yDesire = 1 / (maxY - influencee->getPos().y);
+    }
+    else {
+        yDesire = influencee->getAccel().y;
+    }
+
+    return ofVec2f(xDesire, yDesire);
+}

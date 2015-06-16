@@ -23,6 +23,7 @@ private:
     float weight;
 };
 
+
 class Separation : public Behaviour {
 public:
     Separation(void);
@@ -36,14 +37,30 @@ private:
     int repulsionBoost;
 };
 
+
 class Alignment : public Behaviour {
 protected:
     virtual ofVec2f applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers);
 };
 
+
 class Cohesion : public Behaviour {
 protected:
     virtual ofVec2f applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers);
+};
+
+
+class Cage : public Behaviour {
+public:
+    Cage(void);
+
+    void setThreshold(int threshold);
+
+protected:
+    virtual ofVec2f applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers);
+
+private:
+    int threshold;
 };
 
 #endif //_BEHAVIOUR_H

@@ -27,7 +27,7 @@ void Boid::setup(int w, int h, float maxDist, int behaviourPeriod) {
     accel.y = 0;
 
     Separation* sep = new Separation();
-    sep->setWeight(0.05);
+    sep->setWeight(0.08);
     sep->setRepulsionBoost(3);
     behaviours.push_back(sep);
 
@@ -36,8 +36,13 @@ void Boid::setup(int w, int h, float maxDist, int behaviourPeriod) {
     behaviours.push_back(alg);
 
     Cohesion* coh = new Cohesion();
-    coh->setWeight(0.02);
+    coh->setWeight(0.05);
     behaviours.push_back(coh);
+
+    Cage* cage = new Cage();
+    cage->setWeight(0.3);
+    cage->setThreshold(50);
+    behaviours.push_back(cage);
 }
 
 void Boid::update(std::vector<Boid> &flock) {
@@ -103,6 +108,14 @@ ofVec2f Boid::getSpeed(void) {
 
 ofVec2f Boid::getAccel(void) {
     return accel;
+}
+
+int Boid::getMaxX(void) {
+    return maxX;
+}
+
+int Boid::getMaxY(void) {
+    return maxY;
 }
 
 int Boid::getId(void) {

@@ -20,6 +20,9 @@ public:
     ofVec2f getSpeed(void);
     ofVec2f getAccel(void);
 
+    int getMaxX(void);
+    int getMaxY(void);
+
     int getId(void);
 
 private:
