@@ -26,3 +26,11 @@
 *.exe
 *.out
 *.app
+
+# Exclude obj
+obj/
+
+# Exclude bin except bin/data
+!/bin
+/bin/*
+!/bin/data
