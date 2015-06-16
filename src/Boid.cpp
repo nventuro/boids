@@ -17,13 +17,22 @@ void Boid::setup(int w, int h, float maxDist, int behaviourPeriod) {
 
     speed.x = ofRandom(-1, 1);
     speed.y = ofRandom(-1, 1);
-    speed = speed.getNormalized();
+    speed = speed.getNormalized() * 2;
 
     accel.x = 0;
     accel.y = 0;
 
-    Behaviour* coh = new Cohesion();
-    coh->setWeight(0.005);
+    Separation* sep = new Separation();
+    sep->setWeight(0.05);
+    sep->setRepulsionBoost(3);
+    behaviours.push_back(sep);
+
+    Alignment* alg = new Alignment();
+    alg->setWeight(0.1);
+    behaviours.push_back(alg);
+
+    Cohesion* coh = new Cohesion();
+    coh->setWeight(0.02);
     behaviours.push_back(coh);
 }
 

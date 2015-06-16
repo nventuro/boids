@@ -2,6 +2,14 @@
 
 #include "Boid.h"
 
+#include <cmath>
+
+// Base class
+
+Behaviour::Behaviour(void) {
+    weight = 1;
+}
+
 Behaviour::~Behaviour() {
 }
 
@@ -18,6 +26,44 @@ ofVec2f Behaviour::apply(Boid *influencee, std::vector<Boid*> &influencers) {
         return behResult.getNormalized() * weight;
     }
 }
+
+// Separation
+
+Separation::Separation() {
+    repulsionBoost = 1;
+}
+
+void Separation::setRepulsionBoost(int boost) {
+    repulsionBoost = boost;
+}
+
+ofVec2f Separation::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers) {
+    ofVec2f desire;
+
+    for (std::vector<Boid*>::iterator inf_it = influencers.begin(); inf_it != influencers.end(); ++inf_it) {
+        ofVec2f direction = influencee->getPos() - (*inf_it)->getPos(); // Move away from the influencers
+        float repulsion = 1 / influencee->getPos().squareDistance((*inf_it)->getPos()); // Proportionally to their nearness
+        desire += direction * powf(repulsion, repulsionBoost);
+    }
+    desire /= influencers.size();
+
+    return desire;
+}
+
+// Alignment
+
+ofVec2f Alignment::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers) {
+    ofVec2f flockSpeed(0, 0);
+
+    for (std::vector<Boid*>::iterator inf_it = influencers.begin(); inf_it != influencers.end(); ++inf_it) {
+        flockSpeed += (*inf_it)->getSpeed();
+    }
+    flockSpeed /= influencers.size();
+
+    return flockSpeed - influencee->getSpeed();
+}
+
+// Cohesion
 
 ofVec2f Cohesion::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers) {
     ofVec2f flockCenter(0, 0);

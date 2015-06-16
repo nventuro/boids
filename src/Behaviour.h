@@ -9,6 +9,8 @@
 
 class Behaviour {
 public:
+    Behaviour(void);
+
     void setWeight(float weight);
 
     ofVec2f apply(Boid *influencee, std::vector<Boid*> &influencers);
@@ -19,6 +21,24 @@ protected:
 
 private:
     float weight;
+};
+
+class Separation : public Behaviour {
+public:
+    Separation(void);
+
+    void setRepulsionBoost(int boost);
+
+protected:
+    virtual ofVec2f applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers);
+
+private:
+    int repulsionBoost;
+};
+
+class Alignment : public Behaviour {
+protected:
+    virtual ofVec2f applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers);
 };
 
 class Cohesion : public Behaviour {
