@@ -12,9 +12,11 @@ public:
     void setup(int w, int h, float maxDist = 60, int behaviourPeriod = 5);
     void update(std::vector<Boid> &flock);
     void draw(void);
+    void exit(void);
 
     ofVec2f getPos(void);
     ofVec2f getSpeed(void);
+    ofVec2f getAccel(void);
 
 private:
     int maxX;

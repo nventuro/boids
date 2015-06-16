@@ -26,6 +26,9 @@ void ofApp::draw() {
 }
 
 void ofApp::exit() {
+    for (std::vector<Boid>::iterator boid_it = flock.begin(); boid_it != flock.end(); ++boid_it) {
+        boid_it->exit();
+    }
 }
 
 void ofApp::keyPressed(int key) {

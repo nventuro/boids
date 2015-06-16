@@ -21,6 +21,10 @@ void Boid::setup(int w, int h, float maxDist, int behaviourPeriod) {
 
     accel.x = 0;
     accel.y = 0;
+
+    Behaviour* coh = new Cohesion();
+    coh->setWeight(0.005);
+    behaviours.push_back(coh);
 }
 
 void Boid::update(std::vector<Boid> &flock) {
@@ -70,12 +74,22 @@ void Boid::draw(void) {
     ofCircle(pos, 2);
 }
 
+void Boid::exit(void) {
+    for (std::vector<Behaviour*>::iterator beh_it = behaviours.begin(); beh_it != behaviours.end(); ++beh_it) {
+        delete *beh_it;
+    }
+}
+
 ofVec2f Boid::getPos(void) {
     return pos;
 }
 
 ofVec2f Boid::getSpeed(void) {
     return speed;
+}
+
+ofVec2f Boid::getAccel(void) {
+    return accel;
 }
 
 int Boid::getNextID(void) {
