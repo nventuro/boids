@@ -45,8 +45,7 @@ ofVec2f Separation::applyBehaviour(Boid *influencee, std::vector<Boid*> &influen
         float repulsion = 1 / influencee->getPos().squareDistance((*inf_it)->getPos()); // Proportionally to their nearness
         desire += direction * powf(repulsion, repulsionBoost);
     }
-    desire /= influencers.size();
-
+    
     return desire;
 }
 
@@ -58,8 +57,7 @@ ofVec2f Alignment::applyBehaviour(Boid *influencee, std::vector<Boid*> &influenc
     for (std::vector<Boid*>::iterator inf_it = influencers.begin(); inf_it != influencers.end(); ++inf_it) {
         flockSpeed += (*inf_it)->getSpeed();
     }
-    flockSpeed /= influencers.size();
-
+    
     return flockSpeed - influencee->getSpeed();
 }
 
@@ -71,8 +69,7 @@ ofVec2f Cohesion::applyBehaviour(Boid *influencee, std::vector<Boid*> &influence
     for (std::vector<Boid*>::iterator inf_it = influencers.begin(); inf_it != influencers.end(); ++inf_it) {
         flockCenter += (*inf_it)->getPos();
     }
-    flockCenter /= influencers.size();
-
+    
     return flockCenter - influencee->getPos();
 }
 
@@ -140,8 +137,6 @@ ofVec2f Escape::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers
         return influencee->getAccel();
     }
     else {
-        desire /= predatorCount;
-
         return desire;
     }
 }
