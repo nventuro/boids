@@ -63,4 +63,9 @@ private:
     int threshold;
 };
 
+class Escape : public Behaviour {
+protected:
+    virtual ofVec2f applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers);
+};
+
 #endif //_BEHAVIOUR_H

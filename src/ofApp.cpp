@@ -5,7 +5,12 @@ void ofApp::setup() {
 
     for (int i = 0; i < 300; ++i) {
         flock.push_back(Boid());
-        flock.back().setup(1280, 720, 50, 1);
+        flock.back().setup(1280, 720, Boid::REGULAR, 50, 1);
+    }
+    
+    for (int i = 0; i < 2; ++i) {
+        flock.push_back(Boid());
+        flock.back().setup(1280, 720, Boid::PREDATOR, 100, 1);
     }
 }
 
@@ -18,6 +23,7 @@ void ofApp::update() {
 void ofApp::draw() {
     ofBackground(ofColor::black);
 
+    ofSetColor(ofColor::white);
     ofDrawBitmapString("Framerate: " + ofToString(ofGetFrameRate()), 10, 10);
 
     for (std::vector<Boid>::iterator boid_it = flock.begin(); boid_it != flock.end(); ++boid_it) {

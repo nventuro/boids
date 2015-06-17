@@ -9,9 +9,14 @@
 
 class Boid {
 public:
+    enum Type {
+        REGULAR,
+        PREDATOR
+    };
+
     Boid(void);
 
-    void setup(int w, int h, float maxDist = 60, int behaviourPeriod = 5);
+    void setup(int w, int h, Type = REGULAR, float maxDist = 60, int behaviourPeriod = 5);
     void update(std::vector<Boid> &flock);
     void draw(void);
     void exit(void);
@@ -19,6 +24,8 @@ public:
     ofVec2f getPos(void);
     ofVec2f getSpeed(void);
     ofVec2f getAccel(void);
+    
+    Type getType(void);
 
     int getMaxX(void);
     int getMaxY(void);
@@ -39,6 +46,8 @@ private:
     ofVec2f accel;
 
     std::vector<Behaviour*> behaviours;
+    
+    Type type;
 
     int id;
 

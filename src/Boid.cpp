@@ -9,9 +9,11 @@ Boid::Boid(void) {
     id = getNextID();
 }
 
-void Boid::setup(int w, int h, float maxDist, int behaviourPeriod) {
+void Boid::setup(int w, int h, Type type, float maxDist, int behaviourPeriod) {
     maxX = w;
     maxY = h;
+    
+    this->type = type;
 
     this->maxDist = maxDist;
     this->behaviourPeriod = behaviourPeriod;
@@ -26,23 +28,31 @@ void Boid::setup(int w, int h, float maxDist, int behaviourPeriod) {
     accel.x = 0;
     accel.y = 0;
 
-    Separation* sep = new Separation();
-    sep->setWeight(0.08);
-    sep->setRepulsionBoost(3);
-    behaviours.push_back(sep);
+    if (type == REGULAR) {
+        Separation* sep = new Separation();
+        sep->setWeight(0.08);
+        sep->setRepulsionBoost(3);
+        behaviours.push_back(sep);
 
-    Alignment* alg = new Alignment();
-    alg->setWeight(0.1);
-    behaviours.push_back(alg);
+        Alignment* alg = new Alignment();
+        alg->setWeight(0.1);
+        behaviours.push_back(alg);
 
-    Cohesion* coh = new Cohesion();
-    coh->setWeight(0.05);
-    behaviours.push_back(coh);
+        Cohesion* coh = new Cohesion();
+        coh->setWeight(0.05);
+        behaviours.push_back(coh);
 
-    Cage* cage = new Cage();
-    cage->setWeight(0.3);
-    cage->setThreshold(50);
-    behaviours.push_back(cage);
+        Cage* cage = new Cage();
+        cage->setWeight(0.3);
+        cage->setThreshold(50);
+        behaviours.push_back(cage);
+        
+        Escape* esc = new Escape();
+        esc->setWeight(4);
+        behaviours.push_back(esc);
+    }
+    else if (type == PREDATOR) {
+    }
 }
 
 void Boid::update(std::vector<Boid> &flock) {
@@ -92,8 +102,21 @@ void Boid::update(std::vector<Boid> &flock) {
 }
 
 void Boid::draw(void) {
-    ofSetColor(ofColor::white);
-    ofCircle(pos, 2);
+    switch (type) {
+        case REGULAR:
+            ofSetColor(ofColor::white);
+            ofCircle(pos, 2);
+            break;
+        
+        case PREDATOR:
+            ofSetColor(ofColor::red);
+            ofCircle(pos, 3);
+            break;
+        
+        default:
+            ofLogNotice("boid", "unexpected boid type at draw.");
+            break;
+    }
 }
 
 void Boid::exit(void) {
@@ -112,6 +135,10 @@ ofVec2f Boid::getSpeed(void) {
 
 ofVec2f Boid::getAccel(void) {
     return accel;
+}
+
+Boid::Type Boid::getType(void) {
+    return type;
 }
 
 int Boid::getMaxX(void) {

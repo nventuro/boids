@@ -119,3 +119,29 @@ ofVec2f Cage::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers) 
 
     return ofVec2f(xDesire, yDesire);
 }
+
+// Escape
+
+ofVec2f Escape::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers) {
+    ofVec2f desire(0, 0);
+
+    int predatorCount = 0;
+    for (std::vector<Boid*>::iterator inf_it = influencers.begin(); inf_it != influencers.end(); ++inf_it) {
+        if ((*inf_it)->getType() == Boid::PREDATOR) {
+            ++predatorCount;
+            
+            ofVec2f direction = influencee->getPos() - (*inf_it)->getPos(); // Move away from the predators
+            float repulsion = 1 / influencee->getPos().distance((*inf_it)->getPos()); // Proportionally to their nearness
+            desire += direction * repulsion;
+        }
+    }
+    
+    if (predatorCount == 0) {
+        return influencee->getAccel();
+    }
+    else {
+        desire /= predatorCount;
+
+        return desire;
+    }
+}
