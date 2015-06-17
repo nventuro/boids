@@ -54,8 +54,6 @@ void Boid::setup(int w, int h, Type type, float maxDist, int behaviourPeriod) {
             break;
         
         case PREDATOR:
-            ofSetColor(ofColor::red);
-            ofCircle(pos, 3);
             break;
         
         default:
