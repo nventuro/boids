@@ -99,7 +99,7 @@ ofVec2f Cage::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers) 
         xDesire = 1 / influencee->getPos().x;
     }
     else if ((maxX - influencee->getPos().x) < threshold) {
-        xDesire = 1 / (maxX - influencee->getPos().x);
+        xDesire = -1 / (maxX - influencee->getPos().x);
     }
     else {
         xDesire = influencee->getAccel().x;
@@ -111,7 +111,7 @@ ofVec2f Cage::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers) 
         yDesire = 1 / influencee->getPos().y;
     }
     else if ((maxY - influencee->getPos().y) < threshold) {
-        yDesire = 1 / (maxY - influencee->getPos().y);
+        yDesire = -1 / (maxY - influencee->getPos().y);
     }
     else {
         yDesire = influencee->getAccel().y;
