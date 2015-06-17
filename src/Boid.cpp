@@ -28,30 +28,39 @@ void Boid::setup(int w, int h, Type type, float maxDist, int behaviourPeriod) {
     accel.x = 0;
     accel.y = 0;
 
-    if (type == REGULAR) {
-        Separation* sep = new Separation();
-        sep->setWeight(0.08);
-        sep->setRepulsionBoost(3);
-        behaviours.push_back(sep);
+    switch (type) {
+        case REGULAR:
+            Separation* sep = new Separation();
+            sep->setWeight(7);
+            sep->setNearnessSelectivity(10);
+            behaviours.push_back(sep);
 
-        Alignment* alg = new Alignment();
-        alg->setWeight(0.1);
-        behaviours.push_back(alg);
+            Alignment* alg = new Alignment();
+            alg->setWeight(3);
+            behaviours.push_back(alg);
 
-        Cohesion* coh = new Cohesion();
-        coh->setWeight(0.05);
-        behaviours.push_back(coh);
+            Cohesion* coh = new Cohesion();
+            coh->setWeight(2);
+            behaviours.push_back(coh);
 
-        Cage* cage = new Cage();
-        cage->setWeight(0.3);
-        cage->setThreshold(50);
-        behaviours.push_back(cage);
+            Cage* cage = new Cage();
+            cage->setWeight(1);
+            cage->setThreshold(80);
+            behaviours.push_back(cage);
+            
+            Escape* esc = new Escape();
+            esc->setWeight(12);
+            behaviours.push_back(esc);
+            break;
         
-        Escape* esc = new Escape();
-        esc->setWeight(4);
-        behaviours.push_back(esc);
-    }
-    else if (type == PREDATOR) {
+        case PREDATOR:
+            ofSetColor(ofColor::red);
+            ofCircle(pos, 3);
+            break;
+        
+        default:
+            ofLogNotice("boid", "unexpected boid type at setup.");
+            break;
     }
 }
 

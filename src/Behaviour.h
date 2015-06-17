@@ -28,13 +28,13 @@ class Separation : public Behaviour {
 public:
     Separation(void);
 
-    void setRepulsionBoost(int boost);
+    void setNearnessSelectivity(float selectivity);
 
 protected:
     virtual ofVec2f applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers);
 
 private:
-    int repulsionBoost;
+    float nearnessSelectivity;
 };
 
 

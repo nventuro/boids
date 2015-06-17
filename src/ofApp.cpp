@@ -5,7 +5,7 @@ void ofApp::setup() {
 
     for (int i = 0; i < 300; ++i) {
         flock.push_back(Boid());
-        flock.back().setup(1280, 720, Boid::REGULAR, 50, 1);
+        flock.back().setup(1280, 720, Boid::REGULAR, 70, 1);
     }
     
     for (int i = 0; i < 2; ++i) {

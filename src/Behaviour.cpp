@@ -30,11 +30,11 @@ ofVec2f Behaviour::apply(Boid *influencee, std::vector<Boid*> &influencers) {
 // Separation
 
 Separation::Separation() {
-    repulsionBoost = 1;
+    nearnessSelectivity = 1;
 }
 
-void Separation::setRepulsionBoost(int boost) {
-    repulsionBoost = boost;
+void Separation::setNearnessSelectivity(float selectivity) {
+    nearnessSelectivity = selectivity;
 }
 
 ofVec2f Separation::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers) {
@@ -43,7 +43,7 @@ ofVec2f Separation::applyBehaviour(Boid *influencee, std::vector<Boid*> &influen
     for (std::vector<Boid*>::iterator inf_it = influencers.begin(); inf_it != influencers.end(); ++inf_it) {
         ofVec2f direction = influencee->getPos() - (*inf_it)->getPos(); // Move away from the influencers
         float repulsion = 1 / influencee->getPos().squareDistance((*inf_it)->getPos()); // Proportionally to their nearness
-        desire += direction * powf(repulsion, repulsionBoost);
+        desire += direction * powf(repulsion, nearnessSelectivity);
     }
     
     return desire;
@@ -69,6 +69,7 @@ ofVec2f Cohesion::applyBehaviour(Boid *influencee, std::vector<Boid*> &influence
     for (std::vector<Boid*>::iterator inf_it = influencers.begin(); inf_it != influencers.end(); ++inf_it) {
         flockCenter += (*inf_it)->getPos();
     }
+    flockCenter /= influencers.size();
     
     return flockCenter - influencee->getPos();
 }
