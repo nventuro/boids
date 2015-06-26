@@ -3,4 +3,11 @@
 
 class Boid;
 
+namespace BoidMisc {
+    enum Type {
+        REGULAR,
+        PREDATOR
+    };
+}
+
 #endif // _BOID_FWD_H

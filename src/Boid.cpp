@@ -9,7 +9,7 @@ Boid::Boid(void) {
     id = getNextID();
 }
 
-void Boid::setup(int w, int h, Type type, float maxDist, int behaviourPeriod) {
+void Boid::setup(int w, int h, BoidMisc::Type type, float maxDist, int behaviourPeriod) {
     maxX = w;
     maxY = h;
     
@@ -28,37 +28,39 @@ void Boid::setup(int w, int h, Type type, float maxDist, int behaviourPeriod) {
     accel.x = 0;
     accel.y = 0;
 
-    switch (type) {
-        case REGULAR:
-            Separation* sep = new Separation();
-            sep->setWeight(7);
-            sep->setNearnessSelectivity(10);
-            behaviours.push_back(sep);
+    if (type == BoidMisc::REGULAR) {
+        Separation* sep = new Separation();
+        sep->setWeight(7);
+        sep->setInfluencerType(BoidMisc::REGULAR);
+        sep->setNearnessSelectivity(10);
+        behaviours.push_back(sep);
 
-            Alignment* alg = new Alignment();
-            alg->setWeight(3);
-            behaviours.push_back(alg);
+        Alignment* alg = new Alignment();
+        alg->setWeight(3);
+        alg->setInfluencerType(BoidMisc::REGULAR);
+        behaviours.push_back(alg);
 
-            Cohesion* coh = new Cohesion();
-            coh->setWeight(2);
-            behaviours.push_back(coh);
+        Cohesion* coh = new Cohesion();
+        coh->setWeight(2);
+        coh->setInfluencerType(BoidMisc::REGULAR);
+        behaviours.push_back(coh);
 
-            Cage* cage = new Cage();
-            cage->setWeight(1);
-            cage->setThreshold(80);
-            behaviours.push_back(cage);
-            
-            Escape* esc = new Escape();
-            esc->setWeight(12);
-            behaviours.push_back(esc);
-            break;
+        Cage* cage = new Cage();
+        cage->setWeight(1);
+        cage->setThreshold(80);
+        cage->setInfluencerType(BoidMisc::REGULAR);
+        behaviours.push_back(cage);
         
-        case PREDATOR:
-            break;
-        
-        default:
-            ofLogNotice("boid", "unexpected boid type at setup.");
-            break;
+        Separation* esc = new Separation(); // Escape from predators
+        esc->setWeight(12);
+        esc->setInfluencerType(BoidMisc::PREDATOR);
+        esc->setNearnessSelectivity(0.5);
+        behaviours.push_back(esc);
+    }
+    else if (type == BoidMisc::PREDATOR) {
+    }
+    else {
+        ofLogNotice("boid", "unexpected boid type at setup.");
     }
 }
 
@@ -109,20 +111,16 @@ void Boid::update(std::vector<Boid> &flock) {
 }
 
 void Boid::draw(void) {
-    switch (type) {
-        case REGULAR:
-            ofSetColor(ofColor::white);
-            ofCircle(pos, 2);
-            break;
-        
-        case PREDATOR:
-            ofSetColor(ofColor::red);
-            ofCircle(pos, 3);
-            break;
-        
-        default:
-            ofLogNotice("boid", "unexpected boid type at draw.");
-            break;
+    if (type == BoidMisc::REGULAR) {
+        ofSetColor(ofColor::white);
+        ofCircle(pos, 2);
+    }
+    else if (type == BoidMisc::PREDATOR) {
+        ofSetColor(ofColor::red);
+        ofCircle(pos, 3);
+    }
+    else {
+        ofLogNotice("boid", "unexpected boid type at draw.");
     }
 }
 
@@ -144,7 +142,7 @@ ofVec2f Boid::getAccel(void) {
     return accel;
 }
 
-Boid::Type Boid::getType(void) {
+BoidMisc::Type Boid::getType(void) {
     return type;
 }
 

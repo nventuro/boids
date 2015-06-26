@@ -12,6 +12,9 @@ public:
     Behaviour(void);
 
     void setWeight(float weight);
+    void setInfluencerType(BoidMisc::Type type);
+    
+    BoidMisc::Type getInfluencerType(void);
 
     ofVec2f apply(Boid *influencee, std::vector<Boid*> &influencers);
 
@@ -21,6 +24,7 @@ protected:
 
 private:
     float weight;
+    BoidMisc::Type influencerType;
 };
 
 
@@ -61,11 +65,6 @@ protected:
 
 private:
     int threshold;
-};
-
-class Escape : public Behaviour {
-protected:
-    virtual ofVec2f applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers);
 };
 
 #endif //_BEHAVIOUR_H
