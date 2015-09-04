@@ -12,7 +12,7 @@ Boid::Boid(void) {
 void Boid::setup(int w, int h, BoidMisc::Type type, float maxDist, int behaviourPeriod) {
     maxX = w;
     maxY = h;
-    
+
     this->type = type;
 
     this->maxDist = maxDist;
@@ -50,7 +50,7 @@ void Boid::setup(int w, int h, BoidMisc::Type type, float maxDist, int behaviour
         cage->setThreshold(80);
         cage->setInfluencerType(BoidMisc::REGULAR);
         behaviours.push_back(cage);
-        
+
         Separation* esc = new Separation(); // Escape from predators
         esc->setWeight(12);
         esc->setInfluencerType(BoidMisc::PREDATOR);

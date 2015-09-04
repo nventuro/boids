@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<?xml version="1.0"?>
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
@@ -30,24 +30,6 @@
 		<Unit filename="config.make">
 			<Option virtualFolder="build config" />
 		</Unit>
-		<Unit filename="src/Behaviour.cpp">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/Behaviour.fwd.h">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/Behaviour.h">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/Boid.cpp">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/Boid.fwd.h">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/Boid.h">
-			<Option virtualFolder="src/" />
-		</Unit>
 		<Unit filename="src/main.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>
@@ -62,5 +44,41 @@
 			<envvars />
 			<debugger />
 		</Extensions>
+		<Unit filename="src/Behaviour.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src/Boid.fwd.h">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src/Behaviour.h">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src/Boid.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src/Boid.h">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src/Behaviour.fwd.h">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxXmlSettings/src/ofxXmlSettings.cpp">
+			<Option virtualFolder="addons/ofxXmlSettings/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxXmlSettings/src/ofxXmlSettings.h">
+			<Option virtualFolder="addons/ofxXmlSettings/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxmlparser.cpp">
+			<Option virtualFolder="addons/ofxXmlSettings/libs" />
+		</Unit>
+		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxmlerror.cpp">
+			<Option virtualFolder="addons/ofxXmlSettings/libs" />
+		</Unit>
+		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxml.h">
+			<Option virtualFolder="addons/ofxXmlSettings/libs" />
+		</Unit>
+		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxml.cpp">
+			<Option virtualFolder="addons/ofxXmlSettings/libs" />
+		</Unit>
 	</Project>
 </CodeBlocks_project_file>

@@ -1,0 +1,15 @@
+<config>
+    <width> 1280 </width>
+    <height> 720 </height>
+    <fps> 60 </fps>
+    <boids type="regular">
+        <amount> 300 </amount>
+        <maxDist> 70 </maxDist>
+        <period> 1 </period>
+    </boids>
+    <boids type="predator">
+        <amount> 2 </amount>
+        <maxDist> 100 </maxDist>
+        <period> 1 </period>
+    </boids>
+</config>

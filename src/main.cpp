@@ -1,8 +1,11 @@
 #include "ofMain.h"
+#include "Settings.h"
 #include "ofApp.h"
 
 int main(void) {
-	ofSetupOpenGL(1280, 720, OF_WINDOW);
+    Settings::load();
+
+	ofSetupOpenGL(Settings::width, Settings::height, OF_WINDOW);
 
 	ofRunApp(new ofApp());
 }

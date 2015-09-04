@@ -1,17 +1,18 @@
 #include "ofApp.h"
+#include "Settings.h"
 
 void ofApp::setup() {
     ofSeedRandom();
 
-    for (int i = 0; i < 300; ++i) {
-        flock.push_back(Boid());
-        flock.back().setup(1280, 720, BoidMisc::REGULAR, 70, 1);
+    flock.clear();
+    for (std::map<BoidMisc::Type, Settings::BoidTypeData>::iterator b_it = Settings::boidType.begin(); b_it != Settings::boidType.end(); ++b_it) {
+        for (int i = 0; i < b_it->second.amount; ++i) {
+            flock.push_back(Boid());
+            flock.back().setup(Settings::width, Settings::height, b_it->first, b_it->second.maxDist, b_it->second.period);
+        }
     }
-    
-    for (int i = 0; i < 2; ++i) {
-        flock.push_back(Boid());
-        flock.back().setup(1280, 720, BoidMisc::PREDATOR, 100, 1);
-    }
+
+    ofSetFrameRate(Settings::fps);
 }
 
 void ofApp::update() {

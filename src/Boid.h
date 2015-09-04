@@ -9,11 +9,6 @@
 
 class Boid {
 public:
-    /*enum Type {
-        REGULAR,
-        PREDATOR
-    };*/
-
     Boid(void);
 
     void setup(int w, int h, BoidMisc::Type = BoidMisc::REGULAR, float maxDist = 60, int behaviourPeriod = 5);
