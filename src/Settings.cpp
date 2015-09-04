@@ -29,6 +29,7 @@ void Settings::load() {
         typeData.amount = xml.getValue("amount", 100);
         typeData.maxDist = xml.getValue("maxDist", 100);
         typeData.period = xml.getValue("period", 1);
+        typeData.maxSpeed = xml.getValue("maxSpeed", 8.0);
 
         boidType.insert(std::make_pair<BoidMisc::Type, BoidTypeData>(BoidMisc::TypenameToType(type_name), typeData));
         xml.popTag(); // exit boids

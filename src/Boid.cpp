@@ -1,15 +1,14 @@
 #include "Boid.h"
 
-#include "Behaviour.h"
-
 #include "ofMath.h"
 #include "ofGraphics.h"
+#include "Behaviour.h"
 
 Boid::Boid(void) {
     id = getNextID();
 }
 
-void Boid::setup(int w, int h, BoidMisc::Type type, float maxDist, int behaviourPeriod) {
+void Boid::setup(int w, int h, BoidMisc::Type type, float maxDist, int behaviourPeriod, float maxSpeed) {
     maxX = w;
     maxY = h;
 
@@ -24,6 +23,7 @@ void Boid::setup(int w, int h, BoidMisc::Type type, float maxDist, int behaviour
     speed.x = ofRandom(-1, 1);
     speed.y = ofRandom(-1, 1);
     speed = speed.getNormalized() * 2;
+    this->maxSpeed = maxSpeed;
 
     accel.x = 0;
     accel.y = 0;
@@ -77,24 +77,20 @@ void Boid::update(std::vector<Boid> &flock) {
             }
         }
 
-        std::vector<ofVec2f> desiredAccels;
         for (std::vector<Behaviour*>::iterator beh_it = behaviours.begin(); beh_it != behaviours.end(); ++beh_it) {
-            desiredAccels.push_back((*beh_it)->apply(this, nearbyBoids));
+            accel += (*beh_it)->apply(this, nearbyBoids);
         }
-
-        for (std::vector<ofVec2f>::iterator daccel_it = desiredAccels.begin(); daccel_it != desiredAccels.end(); ++daccel_it) {
-            accel += *daccel_it;
-        }
-        accel /= desiredAccels.size() + 1;
+        accel /= behaviours.size() + 1; // +1 because we're also taking into account our old acceleration
     }
 
     speed += accel;
-    if (speed.length() > 8) {
-        speed = speed.getNormalized() * 8;
+    if (speed.length() > maxSpeed) {
+        speed = speed.getNormalized() * maxSpeed;
     }
 
     pos += speed;
 
+    // Horizontal wrap-around
     if (pos.x > maxX) {
         pos.x -= maxX;
     }
@@ -102,6 +98,7 @@ void Boid::update(std::vector<Boid> &flock) {
         pos.x += maxX;
     }
 
+    // Vertical wrap-around
     if (pos.y > maxY) {
         pos.y -= maxY;
     }
@@ -140,6 +137,10 @@ ofVec2f Boid::getSpeed(void) {
 
 ofVec2f Boid::getAccel(void) {
     return accel;
+}
+
+float Boid::getMaxSpeed(void) {
+    return maxSpeed;
 }
 
 BoidMisc::Type Boid::getType(void) {

@@ -11,7 +11,7 @@ class Boid {
 public:
     Boid(void);
 
-    void setup(int w, int h, BoidMisc::Type = BoidMisc::REGULAR, float maxDist = 60, int behaviourPeriod = 5);
+    void setup(int w, int h, BoidMisc::Type type, float maxDist, int behaviourPeriod, float maxSpeed);
     void update(std::vector<Boid> &flock);
     void draw(void);
     void exit(void);
@@ -19,7 +19,9 @@ public:
     ofVec2f getPos(void);
     ofVec2f getSpeed(void);
     ofVec2f getAccel(void);
-    
+
+    float getMaxSpeed(void);
+
     BoidMisc::Type getType(void);
 
     int getMaxX(void);
@@ -40,8 +42,10 @@ private:
     ofVec2f speed;
     ofVec2f accel;
 
+    float maxSpeed;
+
     std::vector<Behaviour*> behaviours;
-    
+
     BoidMisc::Type type;
 
     int id;

@@ -6,10 +6,12 @@
         <amount> 300 </amount>
         <maxDist> 70 </maxDist>
         <period> 1 </period>
+        <masSpeed> 8 </masSpeed>
     </boids>
     <boids type="predator">
         <amount> 2 </amount>
         <maxDist> 100 </maxDist>
         <period> 1 </period>
+        <masSpeed> 5 </masSpeed>
     </boids>
 </config>

@@ -8,7 +8,7 @@ void ofApp::setup() {
     for (std::map<BoidMisc::Type, Settings::BoidTypeData>::iterator b_it = Settings::boidType.begin(); b_it != Settings::boidType.end(); ++b_it) {
         for (int i = 0; i < b_it->second.amount; ++i) {
             flock.push_back(Boid());
-            flock.back().setup(Settings::width, Settings::height, b_it->first, b_it->second.maxDist, b_it->second.period);
+            flock.back().setup(Settings::width, Settings::height, b_it->first, b_it->second.maxDist, b_it->second.period, b_it->second.maxSpeed);
         }
     }
 

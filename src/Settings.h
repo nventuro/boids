@@ -16,6 +16,7 @@ public:
         int amount;
         int maxDist;
         int period;
+        float maxSpeed;
     };
     static std::map<BoidMisc::Type, BoidTypeData> boidType;
 
