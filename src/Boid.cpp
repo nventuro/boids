@@ -64,7 +64,7 @@ void Boid::setup(int w, int h, BoidMisc::Type type, float maxDist, int behaviour
     }
 }
 
-void Boid::update(std::vector<Boid> &flock) {
+void Boid::calculateUpdate(std::vector<Boid> &flock) {
     if ((++noBehaviourUpdates) >= behaviourPeriod) {
         noBehaviourUpdates = 0;
 
@@ -77,11 +77,16 @@ void Boid::update(std::vector<Boid> &flock) {
             }
         }
 
+        nextAccel = accel;
         for (std::vector<Behaviour*>::iterator beh_it = behaviours.begin(); beh_it != behaviours.end(); ++beh_it) {
-            accel += (*beh_it)->apply(this, nearbyBoids);
+            nextAccel += (*beh_it)->apply(this, nearbyBoids);
         }
-        accel /= behaviours.size() + 1; // +1 because we're also taking into account our old acceleration
+        nextAccel /= behaviours.size() + 1; // +1 because we're also taking into account our old acceleration
     }
+}
+
+void Boid::update(void) {
+    accel = nextAccel;
 
     speed += accel;
     if (speed.length() > maxSpeed) {

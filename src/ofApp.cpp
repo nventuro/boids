@@ -17,7 +17,11 @@ void ofApp::setup() {
 
 void ofApp::update() {
     for (std::vector<Boid>::iterator boid_it = flock.begin(); boid_it != flock.end(); ++boid_it) {
-        boid_it->update(flock);
+        boid_it->calculateUpdate(flock);
+    }
+
+    for (std::vector<Boid>::iterator boid_it = flock.begin(); boid_it != flock.end(); ++boid_it) {
+        boid_it->update();
     }
 }
 

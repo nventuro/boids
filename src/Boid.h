@@ -12,7 +12,14 @@ public:
     Boid(void);
 
     void setup(int w, int h, BoidMisc::Type type, float maxDist, int behaviourPeriod, float maxSpeed);
-    void update(std::vector<Boid> &flock);
+
+    // update is carried out in two steps: first the new acceleration is calculated in calculateUpdate(),
+    // and then the Boid's speed and position are updated in update(). Because calculateUpdate()'s result
+    // depends on the flock's speed and position, update should only be called after calculateUpdate
+    // has been called on the whole flock.
+    void calculateUpdate(std::vector<Boid> &flock);
+    void update(void);
+
     void draw(void);
     void exit(void);
 
@@ -41,6 +48,7 @@ private:
     ofVec2f pos;
     ofVec2f speed;
     ofVec2f accel;
+    ofVec2f nextAccel; // calculated by calculateUpdate, only used internally
 
     float maxSpeed;
 

@@ -28,7 +28,7 @@ BoidMisc::Type Behaviour::getInfluencerType(void) {
 
 ofVec2f Behaviour::apply(Boid *influencee, std::vector<Boid*> &influencers) {
     if (influencers.size() == 0) {
-        return influencee->getAccel();
+        return influencee->getAccel(); // Reinforce the current acceleration
     }
     else {
         return applyBehaviour(influencee, influencers) * weight;

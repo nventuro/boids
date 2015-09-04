@@ -1,0 +1,2 @@
+- Settings de behaviours: capaz se pueden crear copias únicas (en Settings, por ejemplo), y que cada boid guarde un puntero a behaviour, en lugar de la behaviour en si? Habría que poder crear una behaviour a partir de un string (que viene del xml)
+- Update en dos pasadas (calcular aceleración, aplicar)
