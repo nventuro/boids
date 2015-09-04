@@ -37,3 +37,6 @@ obj/
 
 # CodeBlocks layout files
 *.layout
+
+# TODO
+todo.txt
