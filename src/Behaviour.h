@@ -5,15 +5,19 @@
 #include "Behaviour.fwd.h"
 
 #include <vector>
+#include <string>
 #include "ofVec2f.h"
 
 class Behaviour {
 public:
     Behaviour(void);
 
+    static Behaviour* createFromName(std::string behaviour_name);
+    virtual std::string getBehaviourName(void) = 0;
+
     void setWeight(float weight);
     void setInfluencerType(BoidMisc::Type type);
-    
+
     BoidMisc::Type getInfluencerType(void);
 
     ofVec2f apply(Boid *influencee, std::vector<Boid*> &influencers);
@@ -31,6 +35,7 @@ private:
 class Separation : public Behaviour {
 public:
     Separation(void);
+    virtual std::string getBehaviourName(void);
 
     void setNearnessSelectivity(float selectivity);
 
@@ -43,28 +48,20 @@ private:
 
 
 class Alignment : public Behaviour {
+public:
+    virtual std::string getBehaviourName(void);
+
 protected:
     virtual ofVec2f applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers);
 };
 
 
 class Cohesion : public Behaviour {
-protected:
-    virtual ofVec2f applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers);
-};
-
-
-class Cage : public Behaviour {
 public:
-    Cage(void);
-
-    void setThreshold(int threshold);
+    virtual std::string getBehaviourName(void);
 
 protected:
     virtual ofVec2f applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers);
-
-private:
-    int threshold;
 };
 
 #endif //_BEHAVIOUR_H

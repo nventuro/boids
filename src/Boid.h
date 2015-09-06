@@ -11,7 +11,7 @@ class Boid {
 public:
     Boid(void);
 
-    void setup(int w, int h, BoidMisc::Type type, float maxDist, int behaviourPeriod, float maxSpeed);
+    void setup(int w, int h, BoidMisc::Type type, float maxDist, int behaviourPeriod, float maxSpeed, std::vector<Behaviour*> behaviours);
 
     // update is carried out in two steps: first the new acceleration is calculated in calculateUpdate(),
     // and then the Boid's speed and position are updated in update(). Because calculateUpdate()'s result

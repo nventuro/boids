@@ -7,6 +7,28 @@
         <maxDist> 70 </maxDist>
         <period> 1 </period>
         <masSpeed> 8 </masSpeed>
+        <behaviour>
+            <typeName> separation </typeName>
+            <weight> 5 </weight>
+            <influencerType> regular </influencerType>
+            <nearnessSelectivity> 2 </nearnessSelectivity>
+        </behaviour>
+        <behaviour>
+            <typeName> cohesion </typeName>
+            <weight> 5 </weight>
+            <influencerType> regular </influencerType>
+        </behaviour>
+        <behaviour>
+            <typeName> alignment </typeName>
+            <weight> 5 </weight>
+            <influencerType> regular </influencerType>
+        </behaviour>
+        <behaviour>
+            <typeName> separation </typeName>
+            <weight> 5 </weight>
+            <influencerType> predator </influencerType>
+            <nearnessSelectivity> 2 </nearnessSelectivity>
+        </behaviour>
     </boids>
     <boids type="predator">
         <amount> 2 </amount>

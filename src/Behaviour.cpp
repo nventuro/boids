@@ -3,6 +3,7 @@
 #include "Boid.h"
 
 #include <cmath>
+#include <stdexcept>
 
 // Base class
 
@@ -11,7 +12,24 @@ Behaviour::Behaviour(void) {
     influencerType = BoidMisc::REGULAR;
 }
 
-Behaviour::~Behaviour() {
+Behaviour* Behaviour::createFromName(std::string behaviour_name) {
+    if (behaviour_name == "separation") {
+        return new Separation;
+    }
+    else if (behaviour_name == "alignment") {
+        return new Alignment;
+    }
+    else if (behaviour_name == "cohesion") {
+        return new Cohesion;
+    }
+    else {
+        std::stringstream msg;
+        msg << "Behaviour::createFromName: unknown behaviour name: " << behaviour_name << std::endl;
+        throw std::invalid_argument(msg.str());
+    }
+}
+
+Behaviour::~Behaviour(void) {
 }
 
 void Behaviour::setWeight(float weight) {
@@ -37,8 +55,12 @@ ofVec2f Behaviour::apply(Boid *influencee, std::vector<Boid*> &influencers) {
 
 // Separation
 
-Separation::Separation() {
+Separation::Separation(void) {
     nearnessSelectivity = 1;
+}
+
+std::string Separation::getBehaviourName(void) {
+    return "separation";
 }
 
 void Separation::setNearnessSelectivity(float selectivity) {
@@ -59,6 +81,10 @@ ofVec2f Separation::applyBehaviour(Boid *influencee, std::vector<Boid*> &influen
 
 // Alignment
 
+std::string Alignment::getBehaviourName(void) {
+    return "alignment";
+}
+
 ofVec2f Alignment::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers) {
     ofVec2f flockSpeed(0, 0);
 
@@ -71,6 +97,10 @@ ofVec2f Alignment::applyBehaviour(Boid *influencee, std::vector<Boid*> &influenc
 
 // Cohesion
 
+std::string Cohesion::getBehaviourName(void) {
+    return "cohesion";
+}
+
 ofVec2f Cohesion::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers) {
     ofVec2f flockCenter(0, 0);
 
@@ -80,48 +110,4 @@ ofVec2f Cohesion::applyBehaviour(Boid *influencee, std::vector<Boid*> &influence
     flockCenter /= influencers.size();
 
     return flockCenter - influencee->getPos();
-}
-
-// Cage
-
-Cage::Cage() {
-    threshold = 50;
-}
-
-void Cage::setThreshold(int threshold) {
-    this->threshold = threshold;
-}
-
-ofVec2f Cage::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers) {
-    // Cage limits (along with the lines correspoding to x = 0 and y = 0)
-    int maxX = influencee->getMaxX();
-    int maxY = influencee->getMaxY();
-
-    // Threshold is assumed to be smaller than both maxX / 2 and maxY / 2
-
-    float xDesire;
-
-    if (influencee->getPos().x < threshold) {
-        xDesire = 1 / influencee->getPos().x;
-    }
-    else if ((maxX - influencee->getPos().x) < threshold) {
-        xDesire = -1 / (maxX - influencee->getPos().x);
-    }
-    else {
-        xDesire = influencee->getAccel().x;
-    }
-
-    float yDesire;
-
-    if (influencee->getPos().y < threshold) {
-        yDesire = 1 / influencee->getPos().y;
-    }
-    else if ((maxY - influencee->getPos().y) < threshold) {
-        yDesire = -1 / (maxY - influencee->getPos().y);
-    }
-    else {
-        yDesire = influencee->getAccel().y;
-    }
-
-    return ofVec2f(xDesire, yDesire);
 }

@@ -5,9 +5,11 @@
 std::string BoidMisc::TypeToTypename(BoidMisc::Type type) {
     if (type == BoidMisc::REGULAR) {
         return "regular";
-    } else if (type == BoidMisc::PREDATOR) {
+    }
+    else if (type == BoidMisc::PREDATOR) {
         return "predator";
-    } else {
+    }
+    else {
         std::stringstream msg;
         msg << "BoidMisc::TypeToTypename: unknown type: " << type << std::endl;
         throw std::invalid_argument(msg.str());
@@ -17,9 +19,11 @@ std::string BoidMisc::TypeToTypename(BoidMisc::Type type) {
 BoidMisc::Type BoidMisc::TypenameToType(std::string type_name) {
     if (type_name == "regular") {
         return BoidMisc::REGULAR;
-    } else if (type_name == "predator") {
+    }
+    else if (type_name == "predator") {
         return BoidMisc::PREDATOR;
-    } else {
+    }
+    else {
         std::stringstream msg;
         msg << "BoidMisc::TypenameToType: unknown typename: " << type_name << std::endl;
         throw std::invalid_argument(msg.str());

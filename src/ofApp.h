@@ -3,6 +3,10 @@
 #include "ofMain.h"
 
 #include "Boid.h"
+#include "Behaviour.h"
+
+#include <vector>
+#include <map>
 
 class ofApp : public ofBaseApp {
 public:
@@ -15,4 +19,5 @@ public:
     void mousePressed(int x, int y, int button);
 
     std::vector<Boid> flock;
+    std::map<BoidMisc::Type, std::vector<Behaviour*> > behaviours;
 };
