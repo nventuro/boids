@@ -6,12 +6,14 @@
 
 #include <vector>
 #include "ofVec2f.h"
+#include "ofColor.h"
 
 class Boid {
 public:
     Boid(void);
 
     void setup(int w, int h, BoidMisc::Type type, float maxDist, int behaviourPeriod, float maxSpeed, std::vector<Behaviour*> behaviours);
+    void setupGraphics(ofColor color, int size);
 
     // update is carried out in two steps: first the new acceleration is calculated in calculateUpdate(),
     // and then the Boid's speed and position are updated in update(). Because calculateUpdate()'s result
@@ -57,6 +59,9 @@ private:
     BoidMisc::Type type;
 
     int id;
+
+    ofColor color;
+    int size;
 
     static int getNextID(void);
     static int idGen;

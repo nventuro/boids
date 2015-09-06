@@ -2,11 +2,18 @@
     <width> 1280 </width>
     <height> 720 </height>
     <fps> 60 </fps>
+    <graphics>
+        <backgroundColor> 0, 0, 0 </backgroundColor>
+    </graphics>
     <boids type="regular">
         <amount> 400 </amount>
         <maxDist> 100 </maxDist>
         <period> 1 </period>
         <maxSpeed> 6 </maxSpeed>
+        <graphics>
+            <color> 255, 255, 255 </color>
+            <size> 2 </size>
+        </graphics>
         <behaviour>
             <typeName> separation </typeName>
             <weight> 300000 </weight>
@@ -35,6 +42,10 @@
         <maxDist> 500 </maxDist>
         <period> 1 </period>
         <maxSpeed> 4 </maxSpeed>
+        <graphics>
+            <color> 255, 0, 0 </color>
+            <size> 3 </size>
+        </graphics>
         <behaviour> <!-- Prey on regular boids -->
             <typeName> cohesion </typeName>
             <weight> 20 </weight>

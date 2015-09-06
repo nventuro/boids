@@ -19,6 +19,10 @@ void Settings::load() {
     height = xml.getValue("height", 720);
     fps = xml.getValue("fps", 60);
 
+    xml.pushTag("graphics");
+    graphics.backgroundColor = Settings::stringToColor(xml.getValue("backgroundColor", "0, 0, 0"));
+    xml.popTag(); // exit graphics
+
     boidType.clear();
     behaviourType.clear();
 
@@ -33,8 +37,14 @@ void Settings::load() {
         typeData.period = xml.getValue("period", 1);
         typeData.maxSpeed = xml.getValue("maxSpeed", 8.0);
 
+        xml.pushTag("graphics");
+        typeData.graphics.color = Settings::stringToColor(xml.getValue("color", "0, 0, 0"));
+        typeData.graphics.size = xml.getValue("size", 2);
+        xml.popTag(); // exit graphics
+
         boidType.insert(std::make_pair<BoidMisc::Type, Settings::Boid> (boid_type, typeData));
 
+        // Behaviours for boids of this type
         std::vector<Settings::Behaviour> type_behaviours;
         int numBehaviours = xml.getNumTags("behaviour");
         for (int beh_idx = 0; beh_idx < numBehaviours; ++beh_idx) {
@@ -59,9 +69,15 @@ void Settings::load() {
     }
 }
 
+ofColor Settings::stringToColor(std::string str) {
+    std::vector<std::string> components = ofSplitString(str, ",");
+    return ofColor(ofToInt(components[0]), ofToInt(components[1]), ofToInt(components[2]));
+}
+
 int Settings::width;
 int Settings::height;
 int Settings::fps;
+Settings::Graphics Settings::graphics;
 
 std::map<BoidMisc::Type, Settings::Boid> Settings::boidType;
 std::map<BoidMisc::Type, std::vector<Settings::Behaviour> > Settings::behaviourType;

@@ -31,6 +31,11 @@ void Boid::setup(int w, int h, BoidMisc::Type type, float maxDist, int behaviour
     this->behaviours = behaviours;
 }
 
+void Boid::setupGraphics(ofColor color, int size) {
+    this->color = color;
+    this->size = size;
+}
+
 void Boid::calculateUpdate(std::vector<Boid> &flock) {
     if ((++noBehaviourUpdates) >= behaviourPeriod) {
         noBehaviourUpdates = 0;
@@ -80,17 +85,8 @@ void Boid::update(void) {
 }
 
 void Boid::draw(void) {
-    if (type == BoidMisc::REGULAR) {
-        ofSetColor(ofColor::white);
-        ofCircle(pos, 2);
-    }
-    else if (type == BoidMisc::PREDATOR) {
-        ofSetColor(ofColor::red);
-        ofCircle(pos, 3);
-    }
-    else {
-        ofLogNotice("boid", "unexpected boid type at draw.");
-    }
+    ofSetColor(color);
+    ofCircle(pos, size);
 }
 
 void Boid::exit(void) {

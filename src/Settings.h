@@ -5,6 +5,8 @@
 #include <map>
 #include <vector>
 
+#include "ofColor.h"
+
 #include "Boid.fwd.h"
 
 class Settings {
@@ -13,11 +15,20 @@ public:
     static int height;
     static int fps;
 
+    struct Graphics {
+        ofColor backgroundColor;
+    };
+    static Graphics graphics;
+
     struct Boid {
         int amount;
         int maxDist;
         int period;
         float maxSpeed;
+        struct {
+            ofColor color;
+            int size;
+        } graphics;
     };
 
     static std::map<BoidMisc::Type, Settings::Boid> boidType;
@@ -37,6 +48,8 @@ public:
 
     static void load(void);
     static void save(void);
+
+    static ofColor stringToColor(std::string str);
 };
 
 #endif // _SETTINGS_H

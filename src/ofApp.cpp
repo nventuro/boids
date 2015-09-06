@@ -30,6 +30,7 @@ void ofApp::setup() {
         for (int i = 0; i < b_it->second.amount; ++i) {
             flock.push_back(Boid());
             flock.back().setup(Settings::width, Settings::height, b_it->first, b_it->second.maxDist, b_it->second.period, b_it->second.maxSpeed, behaviours[b_it->first]);
+            flock.back().setupGraphics(b_it->second.graphics.color, b_it->second.graphics.size);
         }
     }
 
@@ -47,7 +48,7 @@ void ofApp::update() {
 }
 
 void ofApp::draw() {
-    ofBackground(ofColor::black);
+    ofBackground(Settings::graphics.backgroundColor);
 
     ofSetColor(ofColor::white);
     ofDrawBitmapString("Framerate: " + ofToString(ofGetFrameRate()), 10, 10);
