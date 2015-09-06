@@ -73,7 +73,11 @@ ofVec2f Separation::applyBehaviour(Boid *influencee, std::vector<Boid*> &influen
     for (std::vector<Boid*>::iterator inf_it = influencers.begin(); inf_it != influencers.end(); ++inf_it) {
         ofVec2f direction = influencee->getPos() - (*inf_it)->getPos(); // Move away from the influencers
         float repulsion = 1 / influencee->getPos().squareDistance((*inf_it)->getPos()); // Proportionally to their nearness
-        desire += direction * powf(repulsion, nearnessSelectivity);
+
+        // repulsion will usually be smaller than 1 (equal to one for two boids one pixel apart). Therefore, a high
+        // nearnessSelectivity will not increase repulsion that much for nearby boids, but instead reduce it greatly
+        // for those that are far away.
+        desire += direction.getNormalized() * powf(repulsion, nearnessSelectivity);
     }
 
     return desire;

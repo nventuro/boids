@@ -3,37 +3,48 @@
     <height> 720 </height>
     <fps> 60 </fps>
     <boids type="regular">
-        <amount> 300 </amount>
-        <maxDist> 70 </maxDist>
+        <amount> 400 </amount>
+        <maxDist> 100 </maxDist>
         <period> 1 </period>
-        <masSpeed> 8 </masSpeed>
+        <maxSpeed> 6 </maxSpeed>
         <behaviour>
             <typeName> separation </typeName>
-            <weight> 5 </weight>
+            <weight> 300000 </weight>
             <influencerType> regular </influencerType>
-            <nearnessSelectivity> 2 </nearnessSelectivity>
+            <nearnessSelectivity> 2.2 </nearnessSelectivity>
         </behaviour>
         <behaviour>
             <typeName> cohesion </typeName>
-            <weight> 5 </weight>
+            <weight> 0.2 </weight>
             <influencerType> regular </influencerType>
         </behaviour>
         <behaviour>
             <typeName> alignment </typeName>
-            <weight> 5 </weight>
+            <weight> 0.3 </weight>
             <influencerType> regular </influencerType>
         </behaviour>
-        <behaviour>
+        <behaviour> <!-- Escape from predators -->
             <typeName> separation </typeName>
-            <weight> 5 </weight>
+            <weight> 2000 </weight>
             <influencerType> predator </influencerType>
-            <nearnessSelectivity> 2 </nearnessSelectivity>
+            <nearnessSelectivity> 1 </nearnessSelectivity>
         </behaviour>
     </boids>
     <boids type="predator">
-        <amount> 2 </amount>
-        <maxDist> 100 </maxDist>
+        <amount> 10 </amount>
+        <maxDist> 500 </maxDist>
         <period> 1 </period>
-        <masSpeed> 5 </masSpeed>
+        <maxSpeed> 4 </maxSpeed>
+        <behaviour> <!-- Prey on regular boids -->
+            <typeName> cohesion </typeName>
+            <weight> 20 </weight>
+            <influencerType> regular </influencerType>
+        </behaviour>
+        <behaviour> <!-- Predators hunt by themselves -->
+            <typeName> separation </typeName>
+            <weight> 10000 </weight>
+            <influencerType> predator </influencerType>
+            <nearnessSelectivity> 0.01 </nearnessSelectivity>
+        </behaviour>
     </boids>
 </config>
