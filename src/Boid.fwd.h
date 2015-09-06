@@ -11,8 +11,8 @@ namespace BoidMisc {
         PREDATOR
     };
 
-    std::string TypeToTypename(Type type);
-    Type TypenameToType(std::string type_name);
+    std::string typeToTypename(Type type);
+    Type typenameToType(std::string type_name);
 }
 
 #endif // _BOID_FWD_H

@@ -11,7 +11,7 @@
         <period> 1 </period>
         <maxSpeed> 6 </maxSpeed>
         <graphics>
-            <color> 255, 255, 255 </color>
+            <color> 255, 255, 255, 255 </color>
             <size> 2 </size>
         </graphics>
         <behaviour>
@@ -43,7 +43,7 @@
         <period> 1 </period>
         <maxSpeed> 4 </maxSpeed>
         <graphics>
-            <color> 255, 0, 0 </color>
+            <color> 255, 0, 0, 255 </color>
             <size> 3 </size>
         </graphics>
         <behaviour> <!-- Prey on regular boids -->

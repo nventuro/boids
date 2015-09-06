@@ -50,6 +50,7 @@ public:
     static void save(void);
 
     static ofColor stringToColor(std::string str);
+    static std::string colorToString(ofColor color);
 };
 
 #endif // _SETTINGS_H
