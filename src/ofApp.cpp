@@ -7,7 +7,7 @@ void ofApp::setup() {
     behaviours.clear();
     // For each boid type, there are behaviours
     for (std::map<BoidMisc::Type, std::vector<Settings::Behaviour> >::iterator bt_it = Settings::behaviourType.begin(); bt_it != Settings::behaviourType.end(); ++bt_it) {
-        behaviours.insert(std::make_pair<BoidMisc::Type, std::vector<Behaviour*> > (bt_it->first, std::vector<Behaviour*>()));
+        behaviours.insert(std::make_pair(bt_it->first, std::vector<Behaviour*>()));
 
         // We create each behaviour, and configure it accordingly
         for (std::vector<Settings::Behaviour>::iterator beh_it = bt_it->second.begin(); beh_it != bt_it->second.end(); ++beh_it) {

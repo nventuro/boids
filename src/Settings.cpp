@@ -2,6 +2,7 @@
 
 #include "ofxXmlSettings.h"
 #include <sstream>
+#include <utility>
 
 const std::string configFile = "config.xml";
 
@@ -42,7 +43,7 @@ void Settings::load(void) {
         typeData.graphics.size = xml.getValue("size", 2);
         xml.popTag(); // exit graphics
 
-        boidType.insert(std::make_pair<BoidMisc::Type, Settings::Boid> (boid_type, typeData));
+        boidType.insert(std::make_pair(boid_type, typeData));
 
         // Behaviours for boids of this type
         std::vector<Settings::Behaviour> type_behaviours;
@@ -63,7 +64,7 @@ void Settings::load(void) {
             xml.popTag(); // exit behaviour
         }
 
-        behaviourType.insert(std::make_pair<BoidMisc::Type, std::vector<Settings::Behaviour> > (boid_type, type_behaviours));
+        behaviourType.insert(std::make_pair(boid_type, type_behaviours));
 
         xml.popTag(); // exit boids
     }

@@ -86,7 +86,7 @@ void Boid::update(void) {
 
 void Boid::draw(void) {
     ofSetColor(color);
-    ofCircle(pos, size);
+    ofDrawCircle(pos, size);
 }
 
 void Boid::exit(void) {
