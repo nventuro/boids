@@ -1,8 +1,10 @@
 #include "ofApp.h"
 #include "Settings.h"
 
-void ofApp::setup() {
+void ofApp::setup(void) {
     ofSeedRandom();
+
+    setupGUI();
 
     behaviours.clear();
     // For each boid type, there are behaviours
@@ -37,7 +39,12 @@ void ofApp::setup() {
     ofSetFrameRate(Settings::fps);
 }
 
-void ofApp::update() {
+void ofApp::setupGUI(void) {
+    gui = new ofxDatGui(ofxDatGuiAnchor::TOP_RIGHT);
+    gui->addHeader("boids - 'h' to hide this panel");
+}
+
+void ofApp::update(void) {
     for (auto &boid : flock) {
         boid.calculateUpdate(flock);
     }
@@ -47,7 +54,7 @@ void ofApp::update() {
     }
 }
 
-void ofApp::draw() {
+void ofApp::draw(void) {
     ofBackground(Settings::graphics.backgroundColor);
 
     ofSetColor(ofColor::white);
@@ -58,7 +65,7 @@ void ofApp::draw() {
     }
 }
 
-void ofApp::exit() {
+void ofApp::exit(void) {
     for (auto &boid : flock) {
         boid.exit();
     }

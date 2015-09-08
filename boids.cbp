@@ -80,5 +80,56 @@
 		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxml.cpp">
 			<Option virtualFolder="addons/ofxXmlSettings/libs" />
 		</Unit>
+		<Unit filename="src/Boid.fwd.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src/Settings.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src/Settings.h">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxDatGui/src/ofxDatGui.h">
+			<Option virtualFolder="addons/ofxDatGui/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxDatGui/src/ofxDatGui.cpp">
+			<Option virtualFolder="addons/ofxDatGui/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxDatGui/src/components/ofxDatGuiButton.h">
+			<Option virtualFolder="addons/ofxDatGui/src/components" />
+		</Unit>
+		<Unit filename="../../../addons/ofxDatGui/src/components/ofxDatGuiTextInput.h">
+			<Option virtualFolder="addons/ofxDatGui/src/components" />
+		</Unit>
+		<Unit filename="../../../addons/ofxDatGui/src/components/ofxDatGuiColorPicker.h">
+			<Option virtualFolder="addons/ofxDatGui/src/components" />
+		</Unit>
+		<Unit filename="../../../addons/ofxDatGui/src/components/ofxDatGuiGroups.h">
+			<Option virtualFolder="addons/ofxDatGui/src/components" />
+		</Unit>
+		<Unit filename="../../../addons/ofxDatGui/src/components/ofxDatGuiSlider.h">
+			<Option virtualFolder="addons/ofxDatGui/src/components" />
+		</Unit>
+		<Unit filename="../../../addons/ofxDatGui/src/components/ofxDatGuiControls.h">
+			<Option virtualFolder="addons/ofxDatGui/src/components" />
+		</Unit>
+		<Unit filename="../../../addons/ofxDatGui/src/components/ofxDatGui2dPad.h">
+			<Option virtualFolder="addons/ofxDatGui/src/components" />
+		</Unit>
+		<Unit filename="../../../addons/ofxDatGui/src/core/ofxDatGuiEvents.h">
+			<Option virtualFolder="addons/ofxDatGui/src/core" />
+		</Unit>
+		<Unit filename="../../../addons/ofxDatGui/src/core/ofxDatGuiComponents.h">
+			<Option virtualFolder="addons/ofxDatGui/src/core" />
+		</Unit>
+		<Unit filename="../../../addons/ofxDatGui/src/core/ofxDatGuiConstants.h">
+			<Option virtualFolder="addons/ofxDatGui/src/core" />
+		</Unit>
+		<Unit filename="../../../addons/ofxDatGui/src/core/ofxDatGuiItem.h">
+			<Option virtualFolder="addons/ofxDatGui/src/core" />
+		</Unit>
+		<Unit filename="../../../addons/ofxDatGui/src/core/ofxDatGuiItem.cpp">
+			<Option virtualFolder="addons/ofxDatGui/src/core" />
+		</Unit>
 	</Project>
 </CodeBlocks_project_file>
