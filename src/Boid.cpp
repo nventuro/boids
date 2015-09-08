@@ -43,15 +43,15 @@ void Boid::calculateUpdate(std::vector<Boid> &flock) {
         float sqMaxDist = maxDist * maxDist;
 
         std::vector<Boid*> nearbyBoids;
-        for (std::vector<Boid>::iterator boid_it = flock.begin(); boid_it != flock.end(); ++boid_it) {
-            if ((id != boid_it->getId()) && (pos.squareDistance(boid_it->getPos()) < sqMaxDist)) {
-                nearbyBoids.push_back(&(*boid_it));
+        for (auto &boid : flock) {
+            if ((id != boid.getId()) && (pos.squareDistance(boid.getPos()) < sqMaxDist)) {
+                nearbyBoids.push_back(&boid);
             }
         }
 
         nextAccel = accel;
-        for (std::vector<Behaviour*>::iterator beh_it = behaviours.begin(); beh_it != behaviours.end(); ++beh_it) {
-            nextAccel += (*beh_it)->apply(this, nearbyBoids);
+        for (auto &behaviour : behaviours) {
+            nextAccel += behaviour->apply(this, nearbyBoids);
         }
         nextAccel /= behaviours.size() + 1; // +1 because we're also taking into account our old acceleration
     }
@@ -90,8 +90,8 @@ void Boid::draw(void) {
 }
 
 void Boid::exit(void) {
-    for (std::vector<Behaviour*>::iterator beh_it = behaviours.begin(); beh_it != behaviours.end(); ++beh_it) {
-        delete *beh_it;
+    for (auto &behaviour : behaviours) {
+        delete behaviour;
     }
 }
 

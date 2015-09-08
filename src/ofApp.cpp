@@ -6,31 +6,31 @@ void ofApp::setup() {
 
     behaviours.clear();
     // For each boid type, there are behaviours
-    for (std::map<BoidMisc::Type, std::vector<Settings::Behaviour> >::iterator bt_it = Settings::behaviourType.begin(); bt_it != Settings::behaviourType.end(); ++bt_it) {
-        behaviours.insert(std::make_pair(bt_it->first, std::vector<Behaviour*>()));
+    for (auto &type_behaviours_pair : Settings::behavioursByType) {
+        behaviours.insert(std::make_pair(type_behaviours_pair.first, std::vector<Behaviour*>()));
 
         // We create each behaviour, and configure it accordingly
-        for (std::vector<Settings::Behaviour>::iterator beh_it = bt_it->second.begin(); beh_it != bt_it->second.end(); ++beh_it) {
-            behaviours[bt_it->first].push_back(Behaviour::createFromName(beh_it->typeName));
+        for (auto &behaviour : type_behaviours_pair.second) {
+            behaviours[type_behaviours_pair.first].push_back(Behaviour::createFromName(behaviour.typeName));
 
-            behaviours[bt_it->first].back()->setWeight(beh_it->weight);
-            behaviours[bt_it->first].back()->setInfluencerType(beh_it->influencerType);
+            behaviours[type_behaviours_pair.first].back()->setWeight(behaviour.weight);
+            behaviours[type_behaviours_pair.first].back()->setInfluencerType(behaviour.influencerType);
 
             // Test for the different derived types (some of which have special configuration that needs to be performed)
-            Separation* sep = dynamic_cast<Separation*>(behaviours[bt_it->first].back());
+            Separation* sep = dynamic_cast<Separation*>(behaviours[type_behaviours_pair.first].back());
             if (sep) {
-                sep->setNearnessSelectivity(beh_it->nearnessSelectivity);
+                sep->setNearnessSelectivity(behaviour.nearnessSelectivity);
             }
         }
     }
 
     flock.clear();
     // For each boid type, there are boids with different configuration (but they all are part of the flock)
-    for (std::map<BoidMisc::Type, Settings::Boid>::iterator b_it = Settings::boidType.begin(); b_it != Settings::boidType.end(); ++b_it) {
-        for (int i = 0; i < b_it->second.amount; ++i) {
+    for (auto &type_boid_pair : Settings::boidsByType) {
+        for (int i = 0; i < type_boid_pair.second.amount; ++i) {
             flock.push_back(Boid());
-            flock.back().setup(Settings::width, Settings::height, b_it->first, b_it->second.maxDist, b_it->second.period, b_it->second.maxSpeed, behaviours[b_it->first]);
-            flock.back().setupGraphics(b_it->second.graphics.color, b_it->second.graphics.size);
+            flock.back().setup(Settings::width, Settings::height, type_boid_pair.first, type_boid_pair.second.maxDist, type_boid_pair.second.period, type_boid_pair.second.maxSpeed, behaviours[type_boid_pair.first]);
+            flock.back().setupGraphics(type_boid_pair.second.graphics.color, type_boid_pair.second.graphics.size);
         }
     }
 
@@ -38,12 +38,12 @@ void ofApp::setup() {
 }
 
 void ofApp::update() {
-    for (std::vector<Boid>::iterator boid_it = flock.begin(); boid_it != flock.end(); ++boid_it) {
-        boid_it->calculateUpdate(flock);
+    for (auto &boid : flock) {
+        boid.calculateUpdate(flock);
     }
 
-    for (std::vector<Boid>::iterator boid_it = flock.begin(); boid_it != flock.end(); ++boid_it) {
-        boid_it->update();
+    for (auto &boid : flock) {
+        boid.update();
     }
 }
 
@@ -53,14 +53,14 @@ void ofApp::draw() {
     ofSetColor(ofColor::white);
     ofDrawBitmapString("Framerate: " + ofToString(ofGetFrameRate()), 10, 10);
 
-    for (std::vector<Boid>::iterator boid_it = flock.begin(); boid_it != flock.end(); ++boid_it) {
-        boid_it->draw();
+    for (auto &boid : flock) {
+        boid.draw();
     }
 }
 
 void ofApp::exit() {
-    for (std::vector<Boid>::iterator boid_it = flock.begin(); boid_it != flock.end(); ++boid_it) {
-        boid_it->exit();
+    for (auto &boid : flock) {
+        boid.exit();
     }
 }
 

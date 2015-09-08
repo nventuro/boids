@@ -70,9 +70,9 @@ void Separation::setNearnessSelectivity(float selectivity) {
 ofVec2f Separation::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers) {
     ofVec2f desire;
 
-    for (std::vector<Boid*>::iterator inf_it = influencers.begin(); inf_it != influencers.end(); ++inf_it) {
-        ofVec2f direction = influencee->getPos() - (*inf_it)->getPos(); // Move away from the influencers
-        float repulsion = 1 / influencee->getPos().squareDistance((*inf_it)->getPos()); // Proportionally to their nearness
+    for (auto &influencer : influencers) {
+        ofVec2f direction = influencee->getPos() - influencer->getPos(); // Move away from the influencers
+        float repulsion = 1 / influencee->getPos().squareDistance(influencer->getPos()); // Proportionally to their nearness
 
         // repulsion will usually be smaller than 1 (equal to one for two boids one pixel apart). Therefore, a high
         // nearnessSelectivity will not increase repulsion that much for nearby boids, but instead reduce it greatly
@@ -92,8 +92,8 @@ std::string Alignment::getBehaviourName(void) {
 ofVec2f Alignment::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers) {
     ofVec2f flockSpeed(0, 0);
 
-    for (std::vector<Boid*>::iterator inf_it = influencers.begin(); inf_it != influencers.end(); ++inf_it) {
-        flockSpeed += (*inf_it)->getSpeed();
+    for (auto &influencer : influencers) {
+        flockSpeed += influencer->getSpeed();
     }
 
     return flockSpeed - influencee->getSpeed();
@@ -108,8 +108,8 @@ std::string Cohesion::getBehaviourName(void) {
 ofVec2f Cohesion::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers) {
     ofVec2f flockCenter(0, 0);
 
-    for (std::vector<Boid*>::iterator inf_it = influencers.begin(); inf_it != influencers.end(); ++inf_it) {
-        flockCenter += (*inf_it)->getPos();
+    for (auto &influencer : influencers) {
+        flockCenter += influencer->getPos();
     }
     flockCenter /= influencers.size();
 

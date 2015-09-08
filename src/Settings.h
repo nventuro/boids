@@ -31,7 +31,7 @@ public:
         } graphics;
     };
 
-    static std::map<BoidMisc::Type, Settings::Boid> boidType;
+    static std::map<BoidMisc::Type, Settings::Boid> boidsByType;
 
     struct Behaviour {
         std::string typeName; // Used to call the corresponding constructor
@@ -44,7 +44,7 @@ public:
         // Separation
         float nearnessSelectivity;
     };
-    static std::map<BoidMisc::Type, std::vector<Settings::Behaviour> > behaviourType;
+    static std::map<BoidMisc::Type, std::vector<Settings::Behaviour> > behavioursByType;
 
     static void load(void);
     static void save(void);
