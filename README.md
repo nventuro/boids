@@ -1,7 +1,7 @@
 # boids
-[Craig Reynold's flocking behaviour](http://www.red3d.com/cwr/boids/), on C++ using [OpenFrameworks](/http://openframeworks.cc).
+[Craig Reynold's flocking behaviour](http://www.red3d.com/cwr/boids/), on C++ using [OpenFrameworks](http://openframeworks.cc).
 
-I've only tested it on Linux 64 bits using OpenFrameworks 0.9 (from the nightly builds), which uses C++11, but there's no reason why it shouldn't work on other platforms. I'll hopefully adding integration with [ofxDatGui](https://github.com/braitsch/ofxDatGui) soon.
+I've only tested it on Linux 64 bits using OpenFrameworks 0.9, which uses C++11, but there's no reason why it shouldn't work on other platforms. I'll hopefully adding integration with [ofxDatGui](https://github.com/braitsch/ofxDatGui) soon.
 
 ## Features
  - Multiple boid types, each with different behaviours and graphical properties
