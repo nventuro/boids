@@ -6,7 +6,8 @@
 
 const std::string configFile = "config.xml";
 
-void Settings::load(void) {
+void Settings::load(void)
+{
     ofxXmlSettings xml;
     if (!xml.loadFile(configFile)) {
         std::stringstream msg;
@@ -70,7 +71,8 @@ void Settings::load(void) {
     }
 }
 
-void Settings::save(void) {
+void Settings::save(void)
+{
     ofxXmlSettings xml;
 
     xml.addTag("config");
@@ -123,7 +125,8 @@ void Settings::save(void) {
     xml.save(configFile);
 }
 
-ofColor Settings::stringToColor(std::string str) {
+ofColor Settings::stringToColor(std::string str)
+{
     std::stringstream ss;
     ss << str;
     ofColor ret;
@@ -131,7 +134,8 @@ ofColor Settings::stringToColor(std::string str) {
     return ret;
 }
 
-std::string Settings::colorToString(ofColor color) {
+std::string Settings::colorToString(ofColor color)
+{
     std::stringstream ss;
     ss << color;
     return ss.str();

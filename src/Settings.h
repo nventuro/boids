@@ -9,7 +9,8 @@
 
 #include "Boid.fwd.h"
 
-class Settings {
+class Settings
+{
 public:
     static int width;
     static int height;

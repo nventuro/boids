@@ -4,11 +4,13 @@
 #include "ofGraphics.h"
 #include "Behaviour.h"
 
-Boid::Boid(void) {
+Boid::Boid(void)
+{
     id = getNextID();
 }
 
-void Boid::setup(int w, int h, BoidMisc::Type type, float maxDist, int behaviourPeriod, float maxSpeed, std::vector<Behaviour*> behaviours) {
+void Boid::setup(int w, int h, BoidMisc::Type type, float maxDist, int behaviourPeriod, float maxSpeed, std::vector<Behaviour*> behaviours)
+{
     maxX = w;
     maxY = h;
 
@@ -31,12 +33,14 @@ void Boid::setup(int w, int h, BoidMisc::Type type, float maxDist, int behaviour
     this->behaviours = behaviours;
 }
 
-void Boid::setupGraphics(ofColor color, int size) {
+void Boid::setupGraphics(ofColor color, int size)
+{
     this->color = color;
     this->size = size;
 }
 
-void Boid::calculateUpdate(std::vector<Boid> &flock) {
+void Boid::calculateUpdate(std::vector<Boid> &flock)
+{
     if ((++noBehaviourUpdates) >= behaviourPeriod) {
         noBehaviourUpdates = 0;
 
@@ -57,7 +61,8 @@ void Boid::calculateUpdate(std::vector<Boid> &flock) {
     }
 }
 
-void Boid::update(void) {
+void Boid::update(void)
+{
     accel = nextAccel;
 
     speed += accel;
@@ -84,50 +89,61 @@ void Boid::update(void) {
     }
 }
 
-void Boid::draw(void) {
+void Boid::draw(void)
+{
     ofSetColor(color);
     ofDrawCircle(pos, size);
 }
 
-void Boid::exit(void) {
+void Boid::exit(void)
+{
     for (auto &behaviour : behaviours) {
         delete behaviour;
     }
 }
 
-ofVec2f Boid::getPos(void) {
+ofVec2f Boid::getPos(void)
+{
     return pos;
 }
 
-ofVec2f Boid::getSpeed(void) {
+ofVec2f Boid::getSpeed(void)
+{
     return speed;
 }
 
-ofVec2f Boid::getAccel(void) {
+ofVec2f Boid::getAccel(void)
+{
     return accel;
 }
 
-float Boid::getMaxSpeed(void) {
+float Boid::getMaxSpeed(void)
+{
     return maxSpeed;
 }
 
-BoidMisc::Type Boid::getType(void) {
+BoidMisc::Type Boid::getType(void)
+{
     return type;
 }
 
-int Boid::getMaxX(void) {
+int Boid::getMaxX(void)
+{
     return maxX;
 }
 
-int Boid::getMaxY(void) {
+int Boid::getMaxY(void)
+{
     return maxY;
 }
 
-int Boid::getId(void) {
+int Boid::getId(void)
+{
     return id;
 }
 
-int Boid::getNextID(void) {
+int Boid::getNextID(void)
+{
     return idGen++;
 }
 

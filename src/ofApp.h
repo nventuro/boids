@@ -9,7 +9,8 @@
 #include <vector>
 #include <map>
 
-class ofApp : public ofBaseApp {
+class ofApp : public ofBaseApp
+{
 public:
     void setup(void);
     void setupGUI(void);

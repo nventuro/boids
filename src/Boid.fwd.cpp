@@ -2,7 +2,8 @@
 #include <sstream>
 #include <stdexcept>
 
-std::string BoidMisc::typeToTypename(BoidMisc::Type type) {
+std::string BoidMisc::typeToTypename(BoidMisc::Type type)
+{
     if (type == BoidMisc::REGULAR) {
         return "regular";
     }
@@ -16,7 +17,8 @@ std::string BoidMisc::typeToTypename(BoidMisc::Type type) {
     }
 }
 
-BoidMisc::Type BoidMisc::typenameToType(std::string type_name) {
+BoidMisc::Type BoidMisc::typenameToType(std::string type_name)
+{
     if (type_name == "regular") {
         return BoidMisc::REGULAR;
     }

@@ -1,7 +1,8 @@
 #include "ofApp.h"
 #include "Settings.h"
 
-void ofApp::setup(void) {
+void ofApp::setup(void)
+{
     ofSeedRandom();
 
     setupGUI();
@@ -39,12 +40,14 @@ void ofApp::setup(void) {
     ofSetFrameRate(Settings::fps);
 }
 
-void ofApp::setupGUI(void) {
+void ofApp::setupGUI(void)
+{
     gui = new ofxDatGui(ofxDatGuiAnchor::TOP_RIGHT);
     gui->addHeader("boids - 'h' to hide this panel");
 }
 
-void ofApp::update(void) {
+void ofApp::update(void)
+{
     for (auto &boid : flock) {
         boid.calculateUpdate(flock);
     }
@@ -54,7 +57,8 @@ void ofApp::update(void) {
     }
 }
 
-void ofApp::draw(void) {
+void ofApp::draw(void)
+{
     ofBackground(Settings::graphics.backgroundColor);
 
     ofSetColor(ofColor::white);
@@ -65,16 +69,19 @@ void ofApp::draw(void) {
     }
 }
 
-void ofApp::exit(void) {
+void ofApp::exit(void)
+{
     for (auto &boid : flock) {
         boid.exit();
     }
 }
 
-void ofApp::keyPressed(int key) {
+void ofApp::keyPressed(int key)
+{
 
 }
 
-void ofApp::mousePressed(int x, int y, int button) {
+void ofApp::mousePressed(int x, int y, int button)
+{
 
 }

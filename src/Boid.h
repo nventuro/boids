@@ -8,7 +8,8 @@
 #include "ofVec2f.h"
 #include "ofColor.h"
 
-class Boid {
+class Boid
+{
 public:
     Boid(void);
 

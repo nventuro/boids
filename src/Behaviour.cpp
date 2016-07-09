@@ -7,12 +7,14 @@
 
 // Base class
 
-Behaviour::Behaviour(void) {
+Behaviour::Behaviour(void)
+{
     weight = 1;
     influencerType = BoidMisc::REGULAR;
 }
 
-Behaviour* Behaviour::createFromName(std::string behaviour_name) {
+Behaviour* Behaviour::createFromName(std::string behaviour_name)
+{
     if (behaviour_name == "separation") {
         return new Separation;
     }
@@ -29,22 +31,27 @@ Behaviour* Behaviour::createFromName(std::string behaviour_name) {
     }
 }
 
-Behaviour::~Behaviour(void) {
+Behaviour::~Behaviour(void)
+{
 }
 
-void Behaviour::setWeight(float weight) {
+void Behaviour::setWeight(float weight)
+{
     this->weight = weight;
 }
 
-void Behaviour::setInfluencerType(BoidMisc::Type type) {
+void Behaviour::setInfluencerType(BoidMisc::Type type)
+{
     influencerType = type;
 }
 
-BoidMisc::Type Behaviour::getInfluencerType(void) {
+BoidMisc::Type Behaviour::getInfluencerType(void)
+{
     return influencerType;
 }
 
-ofVec2f Behaviour::apply(Boid *influencee, std::vector<Boid*> &influencers) {
+ofVec2f Behaviour::apply(Boid *influencee, std::vector<Boid*> &influencers)
+{
     if (influencers.size() == 0) {
         return influencee->getAccel(); // Reinforce the current acceleration
     }
@@ -55,19 +62,23 @@ ofVec2f Behaviour::apply(Boid *influencee, std::vector<Boid*> &influencers) {
 
 // Separation
 
-Separation::Separation(void) {
+Separation::Separation(void)
+{
     nearnessSelectivity = 1;
 }
 
-std::string Separation::getBehaviourName(void) {
+std::string Separation::getBehaviourName(void)
+{
     return "separation";
 }
 
-void Separation::setNearnessSelectivity(float selectivity) {
+void Separation::setNearnessSelectivity(float selectivity)
+{
     nearnessSelectivity = selectivity;
 }
 
-ofVec2f Separation::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers) {
+ofVec2f Separation::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers)
+{
     ofVec2f desire;
 
     for (auto &influencer : influencers) {
@@ -85,11 +96,13 @@ ofVec2f Separation::applyBehaviour(Boid *influencee, std::vector<Boid*> &influen
 
 // Alignment
 
-std::string Alignment::getBehaviourName(void) {
+std::string Alignment::getBehaviourName(void)
+{
     return "alignment";
 }
 
-ofVec2f Alignment::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers) {
+ofVec2f Alignment::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers)
+{
     ofVec2f flockSpeed(0, 0);
 
     for (auto &influencer : influencers) {
@@ -101,11 +114,13 @@ ofVec2f Alignment::applyBehaviour(Boid *influencee, std::vector<Boid*> &influenc
 
 // Cohesion
 
-std::string Cohesion::getBehaviourName(void) {
+std::string Cohesion::getBehaviourName(void)
+{
     return "cohesion";
 }
 
-ofVec2f Cohesion::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers) {
+ofVec2f Cohesion::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers)
+{
     ofVec2f flockCenter(0, 0);
 
     for (auto &influencer : influencers) {

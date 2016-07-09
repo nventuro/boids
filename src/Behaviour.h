@@ -8,7 +8,8 @@
 #include <string>
 #include "ofVec2f.h"
 
-class Behaviour {
+class Behaviour
+{
 public:
     Behaviour(void);
 
@@ -32,7 +33,8 @@ private:
 };
 
 
-class Separation : public Behaviour {
+class Separation : public Behaviour
+{
 public:
     Separation(void);
     virtual std::string getBehaviourName(void);
@@ -47,7 +49,8 @@ private:
 };
 
 
-class Alignment : public Behaviour {
+class Alignment : public Behaviour
+{
 public:
     virtual std::string getBehaviourName(void);
 
@@ -56,7 +59,8 @@ protected:
 };
 
 
-class Cohesion : public Behaviour {
+class Cohesion : public Behaviour
+{
 public:
     virtual std::string getBehaviourName(void);
 
