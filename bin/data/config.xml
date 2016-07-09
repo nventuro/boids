@@ -1,18 +1,18 @@
 <config>
-    <width> 1280 </width>
-    <height> 720 </height>
-    <fps> 30 </fps>
+    <width> 800 </width>
+    <height> 600 </height>
+    <fps> 60 </fps>
     <graphics>
         <backgroundColor> 30, 30, 30 </backgroundColor>
     </graphics>
     <boids type="regular">
-        <amount> 2000 </amount>
+        <amount> 1200 </amount>
         <maxDist> 100 </maxDist>
-        <period> 2 </period>
-        <maxSpeed> 3 </maxSpeed>
+        <period> 1 </period>
+        <maxSpeed> 5 </maxSpeed>
         <graphics>
             <color> 255, 255, 255, 255 </color>
-            <size> 1 </size>
+            <size> 2 </size>
         </graphics>
         <behaviour>
             <typeName> separation </typeName>
@@ -22,7 +22,7 @@
         </behaviour>
         <behaviour>
             <typeName> cohesion </typeName>
-            <weight> 0.9 </weight>
+            <weight> 2 </weight>
             <influencerType> regular </influencerType>
         </behaviour>
         <behaviour>
