@@ -24,7 +24,6 @@ public:
     void update(void);
 
     void draw(void);
-    void exit(void);
 
     ofVec2f getPos(void);
     ofVec2f getSpeed(void);

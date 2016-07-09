@@ -15,10 +15,6 @@ public:
     void setup(void);
     void update(void);
     void draw(void);
-    void exit(void);
-
-    void keyPressed(int key);
-    void mousePressed(int x, int y, int button);
 
     std::vector<Boid> flock;
     std::map<BoidMisc::Type, std::vector<Behaviour*> > behaviours;

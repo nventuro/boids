@@ -8,9 +8,6 @@ class GuiApp : public ofBaseApp
 {
 public:
     void setup(void);
-    void update(void);
-    void draw(void);
-    void exit(void);
 
 private:
     ofxDatGui *gui;

@@ -95,13 +95,6 @@ void Boid::draw(void)
     ofDrawCircle(pos, size);
 }
 
-void Boid::exit(void)
-{
-    for (auto &behaviour : behaviours) {
-        delete behaviour;
-    }
-}
-
 ofVec2f Boid::getPos(void)
 {
     return pos;

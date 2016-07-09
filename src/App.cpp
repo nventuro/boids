@@ -57,20 +57,3 @@ void App::draw(void)
         boid.draw();
     }
 }
-
-void App::exit(void)
-{
-    for (auto &boid : flock) {
-        boid.exit();
-    }
-}
-
-void App::keyPressed(int key)
-{
-
-}
-
-void App::mousePressed(int x, int y, int button)
-{
-
-}

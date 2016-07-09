@@ -14,11 +14,9 @@ void GuiApp::setup(void)
 
     gui->addFRM(0.1);
 
+    gui->addBreak();
+    gui->addLabel("boid controls");
     for (auto &type_boid_pair : Settings::boidsByType) {
-        auto brk = gui->addBreak();
-        brk->setHeight(100.0f);
-
-        cout << brk->getHeight() << endl;
 
         auto boids_folder = gui->addFolder(BoidMisc::typeToTypename(type_boid_pair.first), type_boid_pair.second.graphics.color);
         boids_folder->addColorPicker("color", type_boid_pair.second.graphics.color);
@@ -27,16 +25,4 @@ void GuiApp::setup(void)
 
     ofBackground(theme->color.guiBackground);
     ofSetVerticalSync(false);
-}
-
-void GuiApp::update(void)
-{
-}
-
-void GuiApp::draw(void)
-{
-}
-
-void GuiApp::exit(void)
-{
 }
