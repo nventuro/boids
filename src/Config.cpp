@@ -22,11 +22,11 @@ void Config::load(void)
     fps = xml.getValue("fps", 60);
 
     xml.pushTag("graphics");
-    graphics.backgroundColor = Config::stringToColor(xml.getValue("backgroundColor", "0, 0, 0"));
+    graphics.bkgnd_color = Config::stringToColor(xml.getValue("bkgnd_color", "0, 0, 0"));
     xml.popTag(); // exit graphics
 
-    boidsByType.clear();
-    behavioursByType.clear();
+    boids_by_type.clear();
+    behaviours_by_type.clear();
 
     int numBoidTypes = xml.getNumTags("boids");
     for (int type_idx = 0; type_idx < numBoidTypes; ++type_idx) {
@@ -35,16 +35,16 @@ void Config::load(void)
 
         Config::Boid type_data;
         type_data.amount = xml.getValue("amount", 100);
-        type_data.maxDist = xml.getValue("maxDist", 100);
+        type_data.infl_max_dist = xml.getValue("infl_max_dist", 100);
         type_data.period = xml.getValue("period", 1);
-        type_data.maxSpeed = xml.getValue("maxSpeed", 8.0);
+        type_data.max_speed = xml.getValue("max_speed", 8.0);
 
         xml.pushTag("graphics");
         type_data.graphics.color = Config::stringToColor(xml.getValue("color", "0, 0, 0"));
         type_data.graphics.size = xml.getValue("size", 2);
         xml.popTag(); // exit graphics
 
-        boidsByType.insert(std::make_pair(boid_type, type_data));
+        boids_by_type.insert(std::make_pair(boid_type, type_data));
 
         // Behaviours for boids of this type
         std::vector<Config::Behaviour> type_behaviours;
@@ -53,19 +53,19 @@ void Config::load(void)
             xml.pushTag("behaviour", beh_idx);
 
             Config::Behaviour behaviour_data;
-            behaviour_data.typeName = xml.getValue("typeName", "");
+            behaviour_data.type_name = xml.getValue("type_name", "");
             behaviour_data.weight = xml.getValue("weight", 1.0);
-            behaviour_data.influencerType = BoidMisc::typenameToType(xml.getValue("influencerType", ""));
+            behaviour_data.influencer_type = BoidMisc::typenameToType(xml.getValue("influencer_type", ""));
 
             // Separation
-            behaviour_data.nearnessSelectivity = xml.getValue("nearnessSelectivity", 1.0);
+            behaviour_data.nearness_selectivity = xml.getValue("nearness_selectivity", 1.0);
 
             type_behaviours.push_back(behaviour_data);
 
             xml.popTag(); // exit behaviour
         }
 
-        behavioursByType.insert(std::make_pair(boid_type, type_behaviours));
+        behaviours_by_type.insert(std::make_pair(boid_type, type_behaviours));
 
         xml.popTag(); // exit boids
     }
@@ -84,18 +84,18 @@ void Config::save(void)
 
     xml.addTag("graphics");
     xml.pushTag("graphics");
-    xml.addValue("backgroundColor", colorToString(graphics.backgroundColor));
+    xml.addValue("bkgnd_color", colorToString(graphics.bkgnd_color));
     xml.popTag(); // exit graphics
 
-    for (auto &type_boid_pair : boidsByType) {
+    for (auto &type_boid_pair : boids_by_type) {
         int b_idx = xml.addTag("boids");
         xml.addAttribute("boids", "type", BoidMisc::typeToTypename(type_boid_pair.first), b_idx);
         xml.pushTag("boids", b_idx);
 
         xml.addValue("amount", type_boid_pair.second.amount);
-        xml.addValue("maxDist", type_boid_pair.second.maxDist);
+        xml.addValue("infl_max_dist", type_boid_pair.second.infl_max_dist);
         xml.addValue("period", type_boid_pair.second.period);
-        xml.addValue("maxSpeed", type_boid_pair.second.maxSpeed);
+        xml.addValue("max_speed", type_boid_pair.second.max_speed);
 
         xml.addTag("graphics");
         xml.pushTag("graphics");
@@ -106,15 +106,15 @@ void Config::save(void)
         xml.popTag(); // exit graphics
 
         // Check whether this boid type has behaviours
-        auto &behaviours = behavioursByType[type_boid_pair.first];
+        auto &behaviours = behaviours_by_type[type_boid_pair.first];
         for (auto &behaviour : behaviours) {
             int beh_idx = xml.addTag("behaviour");
             xml.pushTag("behaviour", beh_idx);
 
-            xml.addValue("typeName", behaviour.typeName);
+            xml.addValue("type_name", behaviour.type_name);
             xml.addValue("weight", behaviour.weight);
-            xml.addValue("influencerType", BoidMisc::typeToTypename(behaviour.influencerType));
-            xml.addValue("nearnessSelectivity", behaviour.nearnessSelectivity);
+            xml.addValue("influencer_type", BoidMisc::typeToTypename(behaviour.influencer_type));
+            xml.addValue("nearness_selectivity", behaviour.nearness_selectivity);
 
             xml.popTag(); // exit the current behaviour
         }
@@ -146,5 +146,5 @@ int Config::height;
 int Config::fps;
 Config::Graphics Config::graphics;
 
-std::map<BoidMisc::Type, Config::Boid> Config::boidsByType;
-std::map<BoidMisc::Type, std::vector<Config::Behaviour> > Config::behavioursByType;
+std::map<BoidMisc::Type, Config::Boid> Config::boids_by_type;
+std::map<BoidMisc::Type, std::vector<Config::Behaviour> > Config::behaviours_by_type;

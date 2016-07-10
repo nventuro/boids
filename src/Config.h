@@ -17,35 +17,35 @@ public:
     static int fps;
 
     struct Graphics {
-        ofColor backgroundColor;
+        ofColor bkgnd_color;
     };
     static Graphics graphics;
 
     struct Boid {
         int amount;
-        int maxDist;
+        int infl_max_dist;
         int period;
-        float maxSpeed;
+        float max_speed;
         struct {
             ofColor color;
             int size;
         } graphics;
     };
 
-    static std::map<BoidMisc::Type, Config::Boid> boidsByType;
+    static std::map<BoidMisc::Type, Config::Boid> boids_by_type;
 
     struct Behaviour {
-        std::string typeName; // Used to call the corresponding constructor
+        std::string type_name; // Used to call the corresponding constructor
         float weight;
-        BoidMisc::Type influencerType;
+        BoidMisc::Type influencer_type;
 
         // Rather ugly, but we must put all possible configuration values here (for
         // all Behaviours), since we don't know the Behaviour's type
 
         // Separation
-        float nearnessSelectivity;
+        float nearness_selectivity;
     };
-    static std::map<BoidMisc::Type, std::vector<Config::Behaviour> > behavioursByType;
+    static std::map<BoidMisc::Type, std::vector<Config::Behaviour> > behaviours_by_type;
 
     static void load(void);
     static void save(void);

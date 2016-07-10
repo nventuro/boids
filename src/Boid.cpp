@@ -5,7 +5,7 @@
 #include "Behaviour.h"
 
 Boid::Boid(BoidMisc::Type type, const std::vector<Behaviour*> &behaviours):
-    type(type), config(Config::boidsByType[type]), behaviours(behaviours)
+    type(type), config(Config::boids_by_type[type]), behaviours(behaviours)
 {
     id = getNextID();
 
@@ -14,7 +14,7 @@ Boid::Boid(BoidMisc::Type type, const std::vector<Behaviour*> &behaviours):
 
     speed.x = ofRandom(-1, 1);
     speed.y = ofRandom(-1, 1);
-    speed = speed.getNormalized() * (config.maxSpeed / 3);
+    speed = speed.getNormalized() * (config.max_speed / 3);
 
     accel.x = 0;
     accel.y = 0;
@@ -22,11 +22,11 @@ Boid::Boid(BoidMisc::Type type, const std::vector<Behaviour*> &behaviours):
 
 void Boid::calculateUpdate(const std::vector<Boid> &flock)
 {
-    float sq_max_dist = config.maxDist * config.maxDist;
+    float sq_infl_max_dist = config.infl_max_dist * config.infl_max_dist;
 
     std::vector<const Boid*> nearby_boids;
     for (const auto &boid : flock) {
-        if ((this->id != boid.getId()) && (this->pos.squareDistance(boid.getPos()) < sq_max_dist)) {
+        if ((this->id != boid.getId()) && (this->pos.squareDistance(boid.getPos()) < sq_infl_max_dist)) {
             nearby_boids.push_back(&boid);
         }
     }
@@ -43,8 +43,8 @@ void Boid::update(void)
     accel = next_accel;
 
     speed += accel;
-    if (speed.length() > config.maxSpeed) {
-        speed = speed.getNormalized() * config.maxSpeed;
+    if (speed.length() > config.max_speed) {
+        speed = speed.getNormalized() * config.max_speed;
     }
 
     pos += speed;

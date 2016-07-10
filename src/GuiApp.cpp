@@ -21,15 +21,16 @@ void GuiApp::setup(void)
 
     gui->addBreak();
     gui->addLabel("boid controls");
-    for (const auto &type_boid_pair : Config::boidsByType) {
+    for (const auto &type_boid_pair : Config::boids_by_type) {
+        const auto &boid_type = type_boid_pair.first;
+        const auto &boid_type_config = type_boid_pair.second;
 
-        auto boids_folder = gui->addFolder(BoidMisc::typeToTypename(type_boid_pair.first), type_boid_pair.second.graphics.color);
+        auto boid_type_folder = gui->addFolder(BoidMisc::typeToTypename(boid_type), boid_type_config.graphics.color);
 
-        auto color_picker = boids_folder->addColorPicker("color", type_boid_pair.second.graphics.color);
+        auto color_picker = boid_type_folder->addColorPicker("color", boid_type_config.graphics.color);
+        color_picker->colorPickerEventCallback = std::bind(&GuiApp::colorPickerEvent, this, std::placeholders::_1, boid_type);
 
-        color_picker->colorPickerEventCallback = std::bind(&GuiApp::colorPickerEvent, this, std::placeholders::_1, type_boid_pair.first);
-
-        boids_folder->addSlider("max speed", 1, 10, type_boid_pair.second.maxSpeed);
+        boid_type_folder->addSlider("max speed", 1, 10, boid_type_config.max_speed);
     }
 
     ofBackground(theme->color.guiBackground);
@@ -48,5 +49,5 @@ void GuiApp::fpsCapToggleEvent(ofxDatGuiToggleEvent e)
 
 void GuiApp::colorPickerEvent(ofxDatGuiColorPickerEvent e, BoidMisc::Type type)
 {
-    Config::boidsByType[type].graphics.color = e.color;
+    Config::boids_by_type[type].graphics.color = e.color;
 }

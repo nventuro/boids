@@ -45,7 +45,7 @@ protected:
     virtual ofVec2f applyBehaviour(const Boid *influencee, const std::vector<const Boid*> &influencers);
 
 private:
-    float nearnessSelectivity;
+    float nearness_selectivity;
 };
 
 

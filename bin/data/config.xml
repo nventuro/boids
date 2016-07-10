@@ -3,59 +3,59 @@
     <height> 600 </height>
     <fps> 60 </fps>
     <graphics>
-        <backgroundColor> 30, 30, 30 </backgroundColor>
+        <bkgnd_color> 30, 30, 30 </bkgnd_color>
     </graphics>
     <boids type="regular">
         <amount> 1200 </amount>
-        <maxDist> 100 </maxDist>
+        <infl_dist> 100 </infl_dist>
         <period> 1 </period>
-        <maxSpeed> 5 </maxSpeed>
+        <max_speed> 5 </max_speed>
         <graphics>
             <color> 255, 255, 255, 255 </color>
             <size> 2 </size>
         </graphics>
         <behaviour>
-            <typeName> separation </typeName>
+            <type_name> separation </type_name>
             <weight> 300000 </weight>
-            <influencerType> regular </influencerType>
-            <nearnessSelectivity> 2.2 </nearnessSelectivity>
+            <influencer_type> regular </influencer_type>
+            <nearness_selectivity> 2.2 </nearness_selectivity>
         </behaviour>
         <behaviour>
-            <typeName> cohesion </typeName>
+            <type_name> cohesion </type_name>
             <weight> 2 </weight>
-            <influencerType> regular </influencerType>
+            <influencer_type> regular </influencer_type>
         </behaviour>
         <behaviour>
-            <typeName> alignment </typeName>
+            <type_name> alignment </type_name>
             <weight> 0.3 </weight>
-            <influencerType> regular </influencerType>
+            <influencer_type> regular </influencer_type>
         </behaviour>
         <behaviour> <!-- Escape from predators -->
-            <typeName> separation </typeName>
+            <type_name> separation </type_name>
             <weight> 2000 </weight>
-            <influencerType> predator </influencerType>
-            <nearnessSelectivity> 1 </nearnessSelectivity>
+            <influencer_type> predator </influencer_type>
+            <nearness_selectivity> 1 </nearness_selectivity>
         </behaviour>
     </boids>
     <boids type="predator">
         <amount> 10 </amount>
-        <maxDist> 500 </maxDist>
+        <infl_dist> 500 </infl_dist>
         <period> 1 </period>
-        <maxSpeed> 4 </maxSpeed>
+        <max_speed> 4 </max_speed>
         <graphics>
             <color> 255, 0, 0, 255 </color>
             <size> 3 </size>
         </graphics>
         <behaviour> <!-- Prey on regular boids -->
-            <typeName> cohesion </typeName>
+            <type_name> cohesion </type_name>
             <weight> 20 </weight>
-            <influencerType> regular </influencerType>
+            <influencer_type> regular </influencer_type>
         </behaviour>
         <behaviour> <!-- Predators hunt by themselves -->
-            <typeName> separation </typeName>
+            <type_name> separation </type_name>
             <weight> 10000 </weight>
-            <influencerType> predator </influencerType>
-            <nearnessSelectivity> 0.01 </nearnessSelectivity>
+            <influencer_type> predator </influencer_type>
+            <nearness_selectivity> 0.01 </nearness_selectivity>
         </behaviour>
     </boids>
 </config>

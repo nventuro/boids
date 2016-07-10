@@ -64,7 +64,7 @@ ofVec2f Behaviour::apply(const Boid *influencee, const std::vector<const Boid*> 
 
 Separation::Separation(void)
 {
-    nearnessSelectivity = 1;
+    nearness_selectivity = 1;
 }
 
 std::string Separation::getBehaviourName(void)
@@ -74,7 +74,7 @@ std::string Separation::getBehaviourName(void)
 
 void Separation::setNearnessSelectivity(float selectivity)
 {
-    nearnessSelectivity = selectivity;
+    nearness_selectivity = selectivity;
 }
 
 ofVec2f Separation::applyBehaviour(const Boid *influencee, const std::vector<const Boid*> &influencers)
@@ -86,9 +86,9 @@ ofVec2f Separation::applyBehaviour(const Boid *influencee, const std::vector<con
         float repulsion = 1 / influencee->getPos().squareDistance(influencer->getPos()); // Proportionally to their nearness
 
         // repulsion will usually be smaller than 1 (equal to one for two boids one pixel apart). Therefore, a high
-        // nearnessSelectivity will not increase repulsion that much for nearby boids, but instead reduce it greatly
+        // nearness_selectivity will not increase repulsion that much for nearby boids, but instead reduce it greatly
         // for those that are far away.
-        desire += direction.getNormalized() * powf(repulsion, nearnessSelectivity);
+        desire += direction.getNormalized() * powf(repulsion, nearness_selectivity);
     }
 
     return desire;
