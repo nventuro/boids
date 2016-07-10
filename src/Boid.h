@@ -3,6 +3,7 @@
 
 #include "Boid.fwd.h"
 #include "Behaviour.fwd.h"
+#include "Settings.h"
 
 #include <vector>
 #include "ofVec2f.h"
@@ -11,60 +12,40 @@
 class Boid
 {
 public:
-    Boid(void);
-
-    void setup(int w, int h, BoidMisc::Type type, float maxDist, int behaviourPeriod, float maxSpeed, std::vector<Behaviour*> behaviours);
-    void setupGraphics(ofColor color, int size);
+    Boid(BoidMisc::Type type, const std::vector<Behaviour*> &behaviours);
 
     // update is carried out in two steps: first the new acceleration is calculated in calculateUpdate(),
     // and then the Boid's speed and position are updated in update(). Because calculateUpdate()'s result
     // depends on the flock's speed and position, update should only be called after calculateUpdate
     // has been called on the whole flock.
-    void calculateUpdate(std::vector<Boid> &flock);
+    void calculateUpdate(const std::vector<Boid> &flock);
     void update(void);
 
-    void draw(void);
+    void draw(void) const;
 
-    ofVec2f getPos(void);
-    ofVec2f getSpeed(void);
-    ofVec2f getAccel(void);
+    ofVec2f getPos(void) const;
+    ofVec2f getSpeed(void) const;
+    ofVec2f getAccel(void) const;
 
-    float getMaxSpeed(void);
+    BoidMisc::Type getType(void) const;
 
-    BoidMisc::Type getType(void);
-
-    int getMaxX(void);
-    int getMaxY(void);
-
-    int getId(void);
+    int getId(void) const;
 
 private:
-    int maxX;
-    int maxY;
+    int id;
 
-    float maxDist;
+    BoidMisc::Type type;
+    const Settings::Boid &config;
 
-    int behaviourPeriod;
-    int noBehaviourUpdates;
+    const std::vector<Behaviour*> &behaviours;
 
     ofVec2f pos;
     ofVec2f speed;
     ofVec2f accel;
-    ofVec2f nextAccel; // calculated by calculateUpdate, only used internally
-
-    float maxSpeed;
-
-    std::vector<Behaviour*> behaviours;
-
-    BoidMisc::Type type;
-
-    int id;
-
-    ofColor color;
-    int size;
+    ofVec2f next_accel; // calculated by calculateUpdate, only used internally
 
     static int getNextID(void);
-    static int idGen;
+    static int id_gen;
 };
 
 #endif // _BOID_H

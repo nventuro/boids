@@ -21,11 +21,11 @@ public:
 
     BoidMisc::Type getInfluencerType(void);
 
-    ofVec2f apply(Boid *influencee, std::vector<Boid*> &influencers);
+    ofVec2f apply(const Boid *influencee, const std::vector<const Boid*> &influencers);
 
     virtual ~Behaviour(); // new and delete are called on Behaviours, since pointers to them will exist (that point to derived instances)
 protected:
-    virtual ofVec2f applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers) = 0;
+    virtual ofVec2f applyBehaviour(const Boid *influencee, const std::vector<const Boid*> &influencers) = 0;
 
 private:
     float weight;
@@ -42,7 +42,7 @@ public:
     void setNearnessSelectivity(float selectivity);
 
 protected:
-    virtual ofVec2f applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers);
+    virtual ofVec2f applyBehaviour(const Boid *influencee, const std::vector<const Boid*> &influencers);
 
 private:
     float nearnessSelectivity;
@@ -55,7 +55,7 @@ public:
     virtual std::string getBehaviourName(void);
 
 protected:
-    virtual ofVec2f applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers);
+    virtual ofVec2f applyBehaviour(const Boid *influencee, const std::vector<const Boid*> &influencers);
 };
 
 
@@ -65,7 +65,7 @@ public:
     virtual std::string getBehaviourName(void);
 
 protected:
-    virtual ofVec2f applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers);
+    virtual ofVec2f applyBehaviour(const Boid *influencee, const std::vector<const Boid*> &influencers);
 };
 
 #endif //_BEHAVIOUR_H

@@ -1,10 +1,7 @@
 # Boid
-    - The boids will no longer have independent characteristics (size, color, etc.) They will only have a BoidType (and individual attributes, such as position, speed, etc.). The type characteristics will be read from the Settings object, using they boid type as a key. This will allow all boids of a certain type to change by simply changing that single value.
     - Maybe the boids could also have random "uniqueness" factors, which are multiplied to the global characteristics, for example, some boids may be faster than others, or some boids may apply different weights to certain behaviours.
+    - The boids should only be influenced by boids in their field of view (not those behind them)
 
 # GUI
     - There should be folders for each boid type, where the settings (and behavious) for that type can be changed. Basically, the .xml structure will be copied to the GUI.
     - The different behaviours will also be toggable.
-
-# Known bugs:
-    - The boids window crashes on exit because the behaviours are deleted more than once on App::exit(). This will be fixed once the Boid internal structure is changed.

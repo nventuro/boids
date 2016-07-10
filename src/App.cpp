@@ -3,6 +3,8 @@
 
 void App::setup(void)
 {
+    ofSetWindowTitle("Boids");
+
     ofSeedRandom();
 
     behaviours.clear();
@@ -29,13 +31,9 @@ void App::setup(void)
     // For each boid type, there are boids with different configuration (but they all are part of the flock)
     for (auto &type_boid_pair : Settings::boidsByType) {
         for (int i = 0; i < type_boid_pair.second.amount; ++i) {
-            flock.push_back(Boid());
-            flock.back().setup(Settings::width, Settings::height, type_boid_pair.first, type_boid_pair.second.maxDist, type_boid_pair.second.period, type_boid_pair.second.maxSpeed, behaviours[type_boid_pair.first]);
-            flock.back().setupGraphics(type_boid_pair.second.graphics.color, type_boid_pair.second.graphics.size);
+            flock.push_back(Boid(type_boid_pair.first, behaviours[type_boid_pair.first]));
         }
     }
-
-    ofSetFrameRate(Settings::fps);
 }
 
 void App::update(void)

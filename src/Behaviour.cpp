@@ -50,10 +50,10 @@ BoidMisc::Type Behaviour::getInfluencerType(void)
     return influencerType;
 }
 
-ofVec2f Behaviour::apply(Boid *influencee, std::vector<Boid*> &influencers)
+ofVec2f Behaviour::apply(const Boid *influencee, const std::vector<const Boid*> &influencers)
 {
     if (influencers.size() == 0) {
-        return influencee->getAccel(); // Reinforce the current acceleration
+        return influencee->getAccel(); // No influencers, do the same thing we were doing
     }
     else {
         return applyBehaviour(influencee, influencers) * weight;
@@ -77,11 +77,11 @@ void Separation::setNearnessSelectivity(float selectivity)
     nearnessSelectivity = selectivity;
 }
 
-ofVec2f Separation::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers)
+ofVec2f Separation::applyBehaviour(const Boid *influencee, const std::vector<const Boid*> &influencers)
 {
     ofVec2f desire;
 
-    for (auto &influencer : influencers) {
+    for (const auto &influencer : influencers) {
         ofVec2f direction = influencee->getPos() - influencer->getPos(); // Move away from the influencers
         float repulsion = 1 / influencee->getPos().squareDistance(influencer->getPos()); // Proportionally to their nearness
 
@@ -101,11 +101,11 @@ std::string Alignment::getBehaviourName(void)
     return "alignment";
 }
 
-ofVec2f Alignment::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers)
+ofVec2f Alignment::applyBehaviour(const Boid *influencee, const std::vector<const Boid*> &influencers)
 {
     ofVec2f flockSpeed(0, 0);
 
-    for (auto &influencer : influencers) {
+    for (const auto &influencer : influencers) {
         flockSpeed += influencer->getSpeed();
     }
 
@@ -119,11 +119,11 @@ std::string Cohesion::getBehaviourName(void)
     return "cohesion";
 }
 
-ofVec2f Cohesion::applyBehaviour(Boid *influencee, std::vector<Boid*> &influencers)
+ofVec2f Cohesion::applyBehaviour(const Boid *influencee, const std::vector<const Boid*> &influencers)
 {
     ofVec2f flockCenter(0, 0);
 
-    for (auto &influencer : influencers) {
+    for (const auto &influencer : influencers) {
         flockCenter += influencer->getPos();
     }
     flockCenter /= influencers.size();
