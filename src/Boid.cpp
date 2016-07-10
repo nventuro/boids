@@ -5,12 +5,12 @@
 #include "Behaviour.h"
 
 Boid::Boid(BoidMisc::Type type, const std::vector<Behaviour*> &behaviours):
-    type(type), config(Settings::boidsByType[type]), behaviours(behaviours)
+    type(type), config(Config::boidsByType[type]), behaviours(behaviours)
 {
     id = getNextID();
 
-    pos.x = ofRandom(Settings::width);
-    pos.y = ofRandom(Settings::height);
+    pos.x = ofRandom(Config::width);
+    pos.y = ofRandom(Config::height);
 
     speed.x = ofRandom(-1, 1);
     speed.y = ofRandom(-1, 1);
@@ -25,14 +25,14 @@ void Boid::calculateUpdate(const std::vector<Boid> &flock)
     float sq_max_dist = config.maxDist * config.maxDist;
 
     std::vector<const Boid*> nearby_boids;
-    for (auto &boid : flock) {
+    for (const auto &boid : flock) {
         if ((this->id != boid.getId()) && (this->pos.squareDistance(boid.getPos()) < sq_max_dist)) {
             nearby_boids.push_back(&boid);
         }
     }
 
     next_accel = accel;
-    for (auto &behaviour : behaviours) {
+    for (const auto &behaviour : behaviours) {
         next_accel += behaviour->apply(this, nearby_boids);
     }
     next_accel /= behaviours.size() + 1; // +1 because we're also taking into account our old acceleration
@@ -50,19 +50,17 @@ void Boid::update(void)
     pos += speed;
 
     // Horizontal wrap-around
-    if (pos.x > Settings::width) {
-        pos.x -= Settings::width;
-    }
-    else if (pos.x < 0) {
-        pos.x += Settings::width;
+    if (pos.x > Config::width) {
+        pos.x -= Config::width;
+    } else if (pos.x < 0) {
+        pos.x += Config::width;
     }
 
     // Vertical wrap-around
-    if (pos.y > Settings::height) {
-        pos.y -= Settings::height;
-    }
-    else if (pos.y < 0) {
-        pos.y += Settings::height;
+    if (pos.y > Config::height) {
+        pos.y -= Config::height;
+    } else if (pos.y < 0) {
+        pos.y += Config::height;
     }
 }
 

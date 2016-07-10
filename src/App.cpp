@@ -1,5 +1,10 @@
 #include "App.h"
-#include "Settings.h"
+#include "Config.h"
+
+App::App(std::shared_ptr<GuiApp> gui) :
+    gui(gui)
+{
+}
 
 void App::setup(void)
 {
@@ -9,7 +14,7 @@ void App::setup(void)
 
     behaviours.clear();
     // For each boid type, there are behaviours
-    for (auto &type_behaviours_pair : Settings::behavioursByType) {
+    for (const auto &type_behaviours_pair : Config::behavioursByType) {
         behaviours.insert(std::make_pair(type_behaviours_pair.first, std::vector<Behaviour*>()));
 
         // We create each behaviour, and configure it accordingly
@@ -29,7 +34,7 @@ void App::setup(void)
 
     flock.clear();
     // For each boid type, there are boids with different configuration (but they all are part of the flock)
-    for (auto &type_boid_pair : Settings::boidsByType) {
+    for (const auto &type_boid_pair : Config::boidsByType) {
         for (int i = 0; i < type_boid_pair.second.amount; ++i) {
             flock.push_back(Boid(type_boid_pair.first, behaviours[type_boid_pair.first]));
         }
@@ -49,9 +54,9 @@ void App::update(void)
 
 void App::draw(void)
 {
-    ofBackground(Settings::graphics.backgroundColor);
+    ofBackground(Config::graphics.backgroundColor);
 
-    for (auto &boid : flock) {
+    for (const auto &boid : flock) {
         boid.draw();
     }
 }

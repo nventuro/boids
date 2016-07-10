@@ -2,7 +2,8 @@
 #define _GUIAPP_H
 
 #include "ofMain.h"
-#include "ofxDatGui.h"
+#include "DatGui.h"
+#include "Boid.fwd.h"
 
 class GuiApp : public ofBaseApp
 {
@@ -11,6 +12,9 @@ public:
 
 private:
     ofxDatGui *gui;
+
+    void fpsCapToggleEvent(ofxDatGuiToggleEvent e);
+    void colorPickerEvent(ofxDatGuiColorPickerEvent e, BoidMisc::Type type);
 };
 
 #endif // _BOID_H

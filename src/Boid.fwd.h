@@ -7,12 +7,14 @@ class Boid;
 
 namespace BoidMisc {
     enum Type {
-        REGULAR,
-        PREDATOR
+        FIRST_TYPE,
+        REGULAR = FIRST_TYPE,
+        PREDATOR,
+        LAST_TYPE
     };
 
-    std::string typeToTypename(Type type);
-    Type typenameToType(std::string type_name);
+    const std::string& typeToTypename(Type type);
+    Type typenameToType(const std::string &type_name);
 }
 
 #endif // _BOID_FWD_H

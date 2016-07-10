@@ -12,10 +12,13 @@
 class App : public ofBaseApp
 {
 public:
+    App(std::shared_ptr<GuiApp> gui);
+
     void setup(void);
     void update(void);
     void draw(void);
 
+private:
     std::vector<Boid> flock;
     std::map<BoidMisc::Type, std::vector<Behaviour*> > behaviours;
 

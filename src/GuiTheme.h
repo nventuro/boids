@@ -1,7 +1,7 @@
 #ifndef _GUITHEME_H
 #define _GUITHEME_H
 
-#include "ofxDatGui.h"
+#include "DatGui.h"
 
 class GuiTheme : public ofxDatGuiThemeCharcoal
 {

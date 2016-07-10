@@ -3,7 +3,7 @@
 
 #include "Boid.fwd.h"
 #include "Behaviour.fwd.h"
-#include "Settings.h"
+#include "Config.h"
 
 #include <vector>
 #include "ofVec2f.h"
@@ -35,7 +35,7 @@ private:
     int id;
 
     BoidMisc::Type type;
-    const Settings::Boid &config;
+    const Config::Boid &config;
 
     const std::vector<Behaviour*> &behaviours;
 

@@ -1,5 +1,5 @@
-#ifndef _SETTINGS_H
-#define _SETTINGS_H
+#ifndef _CONFIG_H
+#define _CONFIG_H
 
 #include <string>
 #include <map>
@@ -9,7 +9,7 @@
 
 #include "Boid.fwd.h"
 
-class Settings
+class Config
 {
 public:
     static int width;
@@ -32,7 +32,7 @@ public:
         } graphics;
     };
 
-    static std::map<BoidMisc::Type, Settings::Boid> boidsByType;
+    static std::map<BoidMisc::Type, Config::Boid> boidsByType;
 
     struct Behaviour {
         std::string typeName; // Used to call the corresponding constructor
@@ -45,7 +45,7 @@ public:
         // Separation
         float nearnessSelectivity;
     };
-    static std::map<BoidMisc::Type, std::vector<Settings::Behaviour> > behavioursByType;
+    static std::map<BoidMisc::Type, std::vector<Config::Behaviour> > behavioursByType;
 
     static void load(void);
     static void save(void);
@@ -54,4 +54,4 @@ public:
     static std::string colorToString(ofColor color);
 };
 
-#endif // _SETTINGS_H
+#endif // _CONFIG_H

@@ -1,4 +1,4 @@
-#include "Settings.h"
+#include "Config.h"
 
 #include "ofxXmlSettings.h"
 #include <sstream>
@@ -6,7 +6,7 @@
 
 const std::string configFile = "config.xml";
 
-void Settings::load(void)
+void Config::load(void)
 {
     ofxXmlSettings xml;
     if (!xml.loadFile(configFile)) {
@@ -22,7 +22,7 @@ void Settings::load(void)
     fps = xml.getValue("fps", 60);
 
     xml.pushTag("graphics");
-    graphics.backgroundColor = Settings::stringToColor(xml.getValue("backgroundColor", "0, 0, 0"));
+    graphics.backgroundColor = Config::stringToColor(xml.getValue("backgroundColor", "0, 0, 0"));
     xml.popTag(); // exit graphics
 
     boidsByType.clear();
@@ -33,26 +33,26 @@ void Settings::load(void)
         BoidMisc::Type boid_type = BoidMisc::typenameToType(xml.getAttribute("boids", "type", "", type_idx));
         xml.pushTag("boids", type_idx);
 
-        Settings::Boid type_data;
+        Config::Boid type_data;
         type_data.amount = xml.getValue("amount", 100);
         type_data.maxDist = xml.getValue("maxDist", 100);
         type_data.period = xml.getValue("period", 1);
         type_data.maxSpeed = xml.getValue("maxSpeed", 8.0);
 
         xml.pushTag("graphics");
-        type_data.graphics.color = Settings::stringToColor(xml.getValue("color", "0, 0, 0"));
+        type_data.graphics.color = Config::stringToColor(xml.getValue("color", "0, 0, 0"));
         type_data.graphics.size = xml.getValue("size", 2);
         xml.popTag(); // exit graphics
 
         boidsByType.insert(std::make_pair(boid_type, type_data));
 
         // Behaviours for boids of this type
-        std::vector<Settings::Behaviour> type_behaviours;
+        std::vector<Config::Behaviour> type_behaviours;
         int numBehaviours = xml.getNumTags("behaviour");
         for (int beh_idx = 0; beh_idx < numBehaviours; ++beh_idx) {
             xml.pushTag("behaviour", beh_idx);
 
-            Settings::Behaviour behaviour_data;
+            Config::Behaviour behaviour_data;
             behaviour_data.typeName = xml.getValue("typeName", "");
             behaviour_data.weight = xml.getValue("weight", 1.0);
             behaviour_data.influencerType = BoidMisc::typenameToType(xml.getValue("influencerType", ""));
@@ -71,7 +71,7 @@ void Settings::load(void)
     }
 }
 
-void Settings::save(void)
+void Config::save(void)
 {
     ofxXmlSettings xml;
 
@@ -125,7 +125,7 @@ void Settings::save(void)
     xml.save(configFile);
 }
 
-ofColor Settings::stringToColor(std::string str)
+ofColor Config::stringToColor(std::string str)
 {
     std::stringstream ss;
     ss << str;
@@ -134,17 +134,17 @@ ofColor Settings::stringToColor(std::string str)
     return ret;
 }
 
-std::string Settings::colorToString(ofColor color)
+std::string Config::colorToString(ofColor color)
 {
     std::stringstream ss;
     ss << color;
     return ss.str();
 }
 
-int Settings::width;
-int Settings::height;
-int Settings::fps;
-Settings::Graphics Settings::graphics;
+int Config::width;
+int Config::height;
+int Config::fps;
+Config::Graphics Config::graphics;
 
-std::map<BoidMisc::Type, Settings::Boid> Settings::boidsByType;
-std::map<BoidMisc::Type, std::vector<Settings::Behaviour> > Settings::behavioursByType;
+std::map<BoidMisc::Type, Config::Boid> Config::boidsByType;
+std::map<BoidMisc::Type, std::vector<Config::Behaviour> > Config::behavioursByType;
