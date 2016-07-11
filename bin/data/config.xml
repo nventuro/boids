@@ -6,7 +6,7 @@
         <bkgnd_color> 30, 30, 30 </bkgnd_color>
     </graphics>
     <boids type="regular">
-        <amount> 1200 </amount>
+        <amount> 800 </amount>
         <infl_dist> 100 </infl_dist>
         <period> 1 </period>
         <max_speed> 5 </max_speed>

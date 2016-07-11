@@ -18,7 +18,7 @@ int main(void)
     std::shared_ptr<ofAppBaseWindow> app_window = ofCreateWindow(app_window_settings);
 
     ofGLFWWindowSettings gui_window_settings;
-    gui_window_settings.width = 400;
+    gui_window_settings.width = 320;
     gui_window_settings.height = 400;
     gui_window_settings.setPosition(ofVec2f(100 + Config::width + 50, 100));
     gui_window_settings.resizable = true;

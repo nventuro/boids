@@ -38,16 +38,18 @@ void Boid::calculateUpdate(const std::vector<Boid> &flock)
     next_accel /= behaviours.size() + 1; // +1 because we're also taking into account our old acceleration
 }
 
-void Boid::update(void)
+void Boid::update(float framerate)
 {
+    framerate /= 30;
+
     accel = next_accel;
 
-    speed += accel;
+    speed += accel / framerate;
     if (speed.length() > config.max_speed) {
         speed = speed.getNormalized() * config.max_speed;
     }
 
-    pos += speed;
+    pos += speed / framerate;
 
     // Horizontal wrap-around
     if (pos.x > Config::width) {

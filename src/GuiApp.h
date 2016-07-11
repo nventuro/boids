@@ -14,7 +14,14 @@ private:
     ofxDatGui *gui;
 
     void fpsCapToggleEvent(ofxDatGuiToggleEvent e);
-    void colorPickerEvent(ofxDatGuiColorPickerEvent e, BoidMisc::Type type);
+
+    void boidTypeAmountChanged(ofxDatGuiSliderEvent e, BoidMisc::Type type);
+    void boidTypeMaxSpeedChanged(ofxDatGuiSliderEvent e, BoidMisc::Type type);
+    void boidTypeInflMaxDistChanged(ofxDatGuiSliderEvent e, BoidMisc::Type type);
+
+
+    void boidTypeSizeChanged(ofxDatGuiSliderEvent e, BoidMisc::Type type);
+    void boidTypeColorChanged(ofxDatGuiColorPickerEvent e, BoidMisc::Type type);
 };
 
 #endif // _BOID_H

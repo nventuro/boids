@@ -19,7 +19,7 @@ public:
     // depends on the flock's speed and position, update should only be called after calculateUpdate
     // has been called on the whole flock.
     void calculateUpdate(const std::vector<Boid> &flock);
-    void update(void);
+    void update(float framerate);
 
     void draw(void) const;
 

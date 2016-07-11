@@ -48,7 +48,7 @@ void App::update(void)
     }
 
     for (auto &boid : flock) {
-        boid.update();
+        boid.update(ofGetFrameRate());
     }
 }
 
