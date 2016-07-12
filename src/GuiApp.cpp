@@ -36,6 +36,9 @@ void GuiApp::setup(void)
         auto infl_max_dist_slider = boid_type_folder->addSlider("infl max dist", 1, 120, boid_type_config.infl_max_dist);
         infl_max_dist_slider->sliderEventCallback = std::bind(&GuiApp::boidTypeInflMaxDistChanged, this, std::placeholders::_1, boid_type);
 
+        auto angle_of_view_slider = boid_type_folder->addSlider("angle of view", 10, 180, boid_type_config.angle_of_view);
+        angle_of_view_slider->sliderEventCallback = std::bind(&GuiApp::boidTypeAngleOfViewChanged, this, std::placeholders::_1, boid_type);
+
         auto max_speed_slider = boid_type_folder->addSlider("max speed", 0.5, 10, boid_type_config.max_speed);
         max_speed_slider->sliderEventCallback = std::bind(&GuiApp::boidTypeMaxSpeedChanged, this, std::placeholders::_1, boid_type);
 
@@ -78,6 +81,11 @@ void GuiApp::boidTypeMaxSpeedChanged(ofxDatGuiSliderEvent e, BoidMisc::Type type
 void GuiApp::boidTypeInflMaxDistChanged(ofxDatGuiSliderEvent e, BoidMisc::Type type)
 {
     Config::boids_by_type[type].infl_max_dist = e.value;
+}
+
+void GuiApp::boidTypeAngleOfViewChanged(ofxDatGuiSliderEvent e, BoidMisc::Type type)
+{
+    Config::boids_by_type[type].angle_of_view = e.value;
 }
 
 void GuiApp::boidTypeColorChanged(ofxDatGuiColorPickerEvent e, BoidMisc::Type type)

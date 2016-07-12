@@ -36,6 +36,7 @@ void Config::load(void)
         Config::Boid type_data;
         type_data.amount = xml.getValue("amount", 100);
         type_data.infl_max_dist = xml.getValue("infl_max_dist", 100);
+        type_data.angle_of_view = xml.getValue("angle_of_view", 90);
         type_data.period = xml.getValue("period", 1);
         type_data.max_speed = xml.getValue("max_speed", 8.0);
 
@@ -95,6 +96,7 @@ void Config::save(void)
 
         xml.addValue("amount", type_boid_pair.second.amount);
         xml.addValue("infl_max_dist", type_boid_pair.second.infl_max_dist);
+        xml.addValue("angle_of_view", type_boid_pair.second.angle_of_view);
         xml.addValue("period", type_boid_pair.second.period);
         xml.addValue("max_speed", type_boid_pair.second.max_speed);
 

@@ -24,6 +24,7 @@ public:
     struct Boid {
         int amount;
         int infl_max_dist;
+        float angle_of_view;
         int period;
         float max_speed;
         struct {

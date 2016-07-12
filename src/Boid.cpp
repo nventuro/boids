@@ -24,11 +24,9 @@ Boid::Boid(BoidMisc::Type type, const std::vector<Behaviour*> &behaviours):
 
 void Boid::calculateUpdate(const std::vector<Boid> &flock)
 {
-    float sq_infl_max_dist = config.infl_max_dist * config.infl_max_dist;
-
     std::vector<const Boid*> nearby_boids;
     for (const auto &boid : flock) {
-        if ((this->id != boid.getId()) && (this->pos.squareDistance(boid.getPos()) < sq_infl_max_dist)) {
+        if ((this->id != boid.getId()) && isPointInFOV(boid.getPos())) {
             nearby_boids.push_back(&boid);
         }
     }
@@ -97,6 +95,13 @@ ofVec2f Boid::getAccel(void) const
 BoidMisc::Type Boid::getType(void) const
 {
     return type;
+}
+
+bool Boid::isPointInFOV(ofVec2f point) const
+{
+    float sq_infl_max_dist = config.infl_max_dist * config.infl_max_dist;
+
+    return (this->pos.squareDistance(point) < sq_infl_max_dist) && (abs(speed.angle(point - this->pos)) < (config.angle_of_view / 2));
 }
 
 int Boid::getId(void) const

@@ -44,6 +44,8 @@ private:
     ofVec2f accel;
     ofVec2f next_accel; // calculated by calculateUpdate, only used internally
 
+    bool isPointInFOV(ofVec2f point) const;
+
     static int getNextID(void);
     static int id_gen;
 };

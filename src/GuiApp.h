@@ -17,6 +17,7 @@ private:
 
     void boidTypeAmountChanged(ofxDatGuiSliderEvent e, BoidMisc::Type type);
     void boidTypeMaxSpeedChanged(ofxDatGuiSliderEvent e, BoidMisc::Type type);
+    void boidTypeAngleOfViewChanged(ofxDatGuiSliderEvent e, BoidMisc::Type type);
     void boidTypeInflMaxDistChanged(ofxDatGuiSliderEvent e, BoidMisc::Type type);
 
     void boidTypeSizeChanged(ofxDatGuiSliderEvent e, BoidMisc::Type type);

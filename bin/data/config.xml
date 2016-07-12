@@ -8,6 +8,7 @@
     <boids type="regular">
         <amount> 800 </amount>
         <infl_dist> 100 </infl_dist>
+        <angle_of_view> 90 </angle_of_view>
         <period> 1 </period>
         <max_speed> 5 </max_speed>
         <graphics>
@@ -41,6 +42,7 @@
     <boids type="predator">
         <amount> 10 </amount>
         <infl_dist> 500 </infl_dist>
+        <angle_of_view> 90 </angle_of_view>
         <period> 1 </period>
         <max_speed> 4 </max_speed>
         <graphics>
