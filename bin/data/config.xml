@@ -13,6 +13,7 @@
         <graphics>
             <color> 255, 255, 255, 255 </color>
             <size> 2 </size>
+            <draw_head> 1 </draw_head>
         </graphics>
         <behaviour>
             <type_name> separation </type_name>
@@ -45,6 +46,7 @@
         <graphics>
             <color> 255, 0, 0, 255 </color>
             <size> 3 </size>
+            <draw_head> 1 </draw_head>
         </graphics>
         <behaviour> <!-- Prey on regular boids -->
             <type_name> cohesion </type_name>

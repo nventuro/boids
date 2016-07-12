@@ -19,9 +19,9 @@ private:
     void boidTypeMaxSpeedChanged(ofxDatGuiSliderEvent e, BoidMisc::Type type);
     void boidTypeInflMaxDistChanged(ofxDatGuiSliderEvent e, BoidMisc::Type type);
 
-
     void boidTypeSizeChanged(ofxDatGuiSliderEvent e, BoidMisc::Type type);
     void boidTypeColorChanged(ofxDatGuiColorPickerEvent e, BoidMisc::Type type);
+    void boidTypeDrawHeadChanged(ofxDatGuiToggleEvent e, BoidMisc::Type type);
 };
 
 #endif // _BOID_H

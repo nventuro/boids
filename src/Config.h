@@ -29,6 +29,7 @@ public:
         struct {
             ofColor color;
             int size;
+            bool draw_head;
         } graphics;
     };
 

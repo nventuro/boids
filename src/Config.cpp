@@ -42,6 +42,7 @@ void Config::load(void)
         xml.pushTag("graphics");
         type_data.graphics.color = Config::stringToColor(xml.getValue("color", "0, 0, 0"));
         type_data.graphics.size = xml.getValue("size", 2);
+        type_data.graphics.draw_head = xml.getValue("draw_head", true);
         xml.popTag(); // exit graphics
 
         boids_by_type.insert(std::make_pair(boid_type, type_data));
@@ -102,6 +103,7 @@ void Config::save(void)
 
         xml.addValue("color", colorToString(type_boid_pair.second.graphics.color));
         xml.addValue("size", type_boid_pair.second.graphics.size);
+        xml.addValue("draw_head", type_boid_pair.second.graphics.draw_head);
 
         xml.popTag(); // exit graphics
 

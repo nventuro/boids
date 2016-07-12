@@ -46,6 +46,9 @@ void GuiApp::setup(void)
         size_slider->sliderEventCallback = std::bind(&GuiApp::boidTypeSizeChanged, this, std::placeholders::_1, boid_type);
         size_slider->setPrecision(0);
         size_slider->setValue(boid_type_config.graphics.size); // We need to set this after the precision so that the proper precision is applied
+
+        auto draw_head_toggle = boid_type_folder->addToggle("draw head", boid_type_config.graphics.draw_head);
+        draw_head_toggle->toggleEventCallback = std::bind(&GuiApp::boidTypeDrawHeadChanged, this, std::placeholders::_1, boid_type);
     }
 
     ofBackground(theme->color.guiBackground);
@@ -84,4 +87,9 @@ void GuiApp::boidTypeColorChanged(ofxDatGuiColorPickerEvent e, BoidMisc::Type ty
 void GuiApp::boidTypeSizeChanged(ofxDatGuiSliderEvent e, BoidMisc::Type type)
 {
     Config::boids_by_type[type].graphics.size = e.value;
+}
+
+void GuiApp::boidTypeDrawHeadChanged(ofxDatGuiToggleEvent e, BoidMisc::Type type)
+{
+    Config::boids_by_type[type].graphics.draw_head = e.checked;
 }

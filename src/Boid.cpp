@@ -4,6 +4,8 @@
 #include "ofGraphics.h"
 #include "Behaviour.h"
 
+#include <ctgmath>
+
 Boid::Boid(BoidMisc::Type type, const std::vector<Behaviour*> &behaviours):
     type(type), config(Config::boids_by_type[type]), behaviours(behaviours)
 {
@@ -70,6 +72,11 @@ void Boid::draw(void) const
 {
     ofSetColor(config.graphics.color);
     ofDrawCircle(pos, config.graphics.size);
+
+    if (config.graphics.draw_head) {
+        ofSetLineWidth(std::ceil(config.graphics.size / 2));
+        ofDrawLine(pos, pos + (speed.getNormalized() * config.graphics.size * 2));
+    }
 }
 
 ofVec2f Boid::getPos(void) const
