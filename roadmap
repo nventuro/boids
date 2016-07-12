@@ -1,5 +1,4 @@
 # Boid
-    - The number of boids should be modifiable dinamically
     - Maybe the boids could also have random "uniqueness" factors, which are multiplied to the global characteristics, for example, some boids may be faster than others, or some boids may apply different weights to certain behaviours.
     - The boids should only be influenced by boids in their field of view (not those behind them)
     - The behaviour should not change in 30 and 60 fps

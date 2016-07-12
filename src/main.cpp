@@ -25,8 +25,8 @@ int main(void)
 
     std::shared_ptr<ofAppBaseWindow> gui_window = ofCreateWindow(gui_window_settings);
 
+    std::shared_ptr<App> app(new App);
     std::shared_ptr<GuiApp> gui_app(new GuiApp);
-    std::shared_ptr<App> app(new App(gui_app));
 
     ofRunApp(app_window, app);
     ofRunApp(gui_window, gui_app);

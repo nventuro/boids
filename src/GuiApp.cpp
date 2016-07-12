@@ -28,7 +28,7 @@ void GuiApp::setup(void)
 
         auto boid_type_folder = gui->addFolder(BoidMisc::typeToTypename(boid_type));
 
-        auto amount_slider = boid_type_folder->addSlider("amount", 1, 5000);
+        auto amount_slider = boid_type_folder->addSlider("amount", 1, 1200);
         amount_slider->sliderEventCallback = std::bind(&GuiApp::boidTypeAmountChanged, this, std::placeholders::_1, boid_type);
         amount_slider->setPrecision(0);
         amount_slider->setValue(boid_type_config.amount);
@@ -67,6 +67,7 @@ void GuiApp::fpsCapToggleEvent(ofxDatGuiToggleEvent e)
 
 void GuiApp::boidTypeAmountChanged(ofxDatGuiSliderEvent e, BoidMisc::Type type)
 {
+    Config::boids_by_type[type].amount = e.value;
 }
 
 void GuiApp::boidTypeMaxSpeedChanged(ofxDatGuiSliderEvent e, BoidMisc::Type type)

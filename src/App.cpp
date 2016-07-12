@@ -1,10 +1,8 @@
 #include "App.h"
 #include "Config.h"
 
-App::App(std::shared_ptr<GuiApp> gui) :
-    gui(gui)
-{
-}
+#include <algorithm>
+#include <functional>
 
 void App::setup(void)
 {
@@ -43,6 +41,8 @@ void App::setup(void)
 
 void App::update(void)
 {
+    checkFlockSize();
+
     for (auto &boid : flock) {
         boid.calculateUpdate(flock);
     }
@@ -58,5 +58,26 @@ void App::draw(void)
 
     for (const auto &boid : flock) {
         boid.draw();
+    }
+}
+
+void App::checkFlockSize(void)
+{
+    for (const auto &type_boid_pair : Config::boids_by_type) {
+        auto compare_by_type = [](Boid &boid, BoidMisc::Type type) {return boid.getType() == type;};
+        int type_count = std::count_if(flock.begin(), flock.end(), std::bind(compare_by_type, std::placeholders::_1, type_boid_pair.first));
+
+        int amount_difference = type_boid_pair.second.amount - type_count;
+
+        if (amount_difference > 0) { // Need to add boids
+            for (int i = 0; i < amount_difference; ++i) {
+                flock.push_back(Boid(type_boid_pair.first, behaviours[type_boid_pair.first]));
+            }
+        } else if (amount_difference < 0) { // Need to delete boids
+            amount_difference *= -1;
+            for (int i = 0; i < amount_difference; ++i) {
+                flock.pop_back();
+            }
+        }
     }
 }
